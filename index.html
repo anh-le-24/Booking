@@ -40,7 +40,7 @@
 </head>
 <body class="bg-gray-100 font-sans text-sm antialiased">
 <div class="flex items-start justify-center min-h-screen mt-6">
-  <div class="w-[834px] h-[834px] bg-white border border-neutral-300 rounded-3xl p-4 flex flex-col gap-5 shadow-lg">
+  <div class="w-[834px] h-min-[834px] bg-white border border-neutral-300 rounded-3xl p-4 flex flex-col gap-5 shadow-lg">
     <!-- Title -->
     <h1 class="text-2xl font-medium text-gray-900 leading-8">Vé máy bay đi Đà Nẵng</h1>
     
@@ -59,12 +59,69 @@
         
         <!-- Dropdown -->
         <div id="fromDropdown" class="absolute z-10 w-full mt-1 bg-white border border-neutral-300 rounded-lg shadow-lg hidden">
-          <div class="py-1">
-            <div class="px-3 py-2 cursor-pointer hover:bg-gray-100" onclick="selectOption('from', 'Hà Nội', 'HAN')">
-              <span class="text-gray-900 font-semibold">Hà Nội (HAN)</span>
-            </div>
-            <div class="px-3 py-2 cursor-pointer hover:bg-gray-100" onclick="selectOption('from', 'Đà Nẵng', 'DAD')">
-              <span class="text-gray-900 font-semibold">Đà Nẵng (DAD)</span>
+          <div data-side="bottom" data-align="start" data-state="open" role="dialog" id="radix-«r6b»" data-slot="popover-content" class="text-popover-foreground z-50 origin-(--radix-popover-content-transform-origin) shadow-md outline-hidden bg-white w-[600px] rounded-lg border p-0 md:h-[500px]" tabindex="-1" style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);">
+            <div class="flex h-full flex-col">
+              <div class="bg-white flex-shrink-0 rounded-t-lg border-b p-4">
+          <div class="relative">
+            <input id="fromSearch" placeholder="Tìm tỉnh, thành phố, sân bay" class="bg-white focus:bg-secondary w-full rounded-lg border border-gray-300 py-3 pr-10 pl-10 focus:outline-none" type="text" value="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform text-gray-400" aria-hidden="true">
+              <path d="m21 21-4.34-4.34"></path>
+              <circle cx="11" cy="11" r="8"></circle>
+            </svg>
+          </div>
+              </div>
+              <div class="flex-1 overflow-y-auto">
+          <div id="fromList" class="bg-white space-y-2 border-b px-4 min-h-[420px] py-4">
+                  <div class="border-border-default flex cursor-pointer items-center justify-between border-b py-3 transition-colors hover:bg-gray-50 lg:rounded-lg lg:border-0 lg:p-3 bg-gray-100" data-city="Hà Nội" data-code="HAN" onclick="selectAirport('from', 'Hà Nội, Việt Nam', 'Sân bay Quốc tế Nội Bài', 'HAN')">
+                    <div class="flex min-w-0 flex-1 items-start gap-3">
+                      <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <path d="M21.9519 10.1117C22.1663 10.9119 21.6915 11.7344 20.8913 11.9488L5.22473 16.1466C4.78149 16.2654 4.31431 16.0673 4.09159 15.6661L1.46875 10.9414L2.91764 10.5532L5.38543 12.9978L10.4807 11.6325L5.97021 4.5589L7.90206 4.04126L14.8534 10.4608L20.1148 9.05107C20.915 8.83665 21.7375 9.31153 21.9519 10.1117ZM4.00306 18.9999H20.003V20.9999H4.00306V18.9999Z" fill="#181A20"></path>
+                        </svg>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="truncate font-medium text-gray-900">Hà Nội, Việt Nam</div>
+                        <p class="font-manrope font-medium text-[13px] leading-5 tracking-normal truncate text-gray-500">Sân bay Quốc tế Nội Bài</p>
+                      </div>
+                    </div>
+                    <div class="ml-3 flex-shrink-0 self-end">
+                      <span class="self-end text-sm font-semibold text-gray-900">HAN</span>
+                    </div>
+                  </div>
+                  <div class="border-border-default flex cursor-pointer items-center justify-between border-b py-3 transition-colors hover:bg-gray-50 lg:rounded-lg lg:border-0 lg:p-3" data-city="TP. Hồ Chí Minh" data-code="SGN" onclick="selectAirport('from', 'TP. Hồ Chí Minh, Việt Nam', 'Sân bay Quốc tế Tân Sơn Nhất', 'SGN')">
+                    <div class="flex min-w-0 flex-1 items-start gap-3">
+                      <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <path d="M21.9519 10.1117C22.1663 10.9119 21.6915 11.7344 20.8913 11.9488L5.22473 16.1466C4.78149 16.2654 4.31431 16.0673 4.09159 15.6661L1.46875 10.9414L2.91764 10.5532L5.38543 12.9978L10.4807 11.6325L5.97021 4.5589L7.90206 4.04126L14.8534 10.4608L20.1148 9.05107C20.915 8.83665 21.7375 9.31153 21.9519 10.1117ZM4.00306 18.9999H20.003V20.9999H4.00306V18.9999Z" fill="#181A20"></path>
+                        </svg>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="truncate font-medium text-gray-900">TP. Hồ Chí Minh, Việt Nam</div>
+                        <p class="font-manrope font-medium text-[13px] leading-5 tracking-normal truncate text-gray-500">Sân bay Quốc tế Tân Sơn Nhất</p>
+                      </div>
+                    </div>
+                    <div class="ml-3 flex-shrink-0 self-end">
+                      <span class="self-end text-sm font-semibold text-gray-900">SGN</span>
+                    </div>
+                  </div>
+                  <div class="border-border-default flex cursor-pointer items-center justify-between border-b py-3 transition-colors hover:bg-gray-50 lg:rounded-lg lg:border-0 lg:p-3" data-city="Phú Quốc" data-code="PQC" onclick="selectAirport('from', 'Phú Quốc, Việt Nam', 'Sân bay Quốc tế Phú Quốc', 'PQC')">
+                    <div class="flex min-w-0 flex-1 items-start gap-3">
+                      <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <path d="M21.9519 10.1117C22.1663 10.9119 21.6915 11.7344 20.8913 11.9488L5.22473 16.1466C4.78149 16.2654 4.31431 16.0673 4.09159 15.6661L1.46875 10.9414L2.91764 10.5532L5.38543 12.9978L10.4807 11.6325L5.97021 4.5589L7.90206 4.04126L14.8534 10.4608L20.1148 9.05107C20.915 8.83665 21.7375 9.31153 21.9519 10.1117ZM4.00306 18.9999H20.003V20.9999H4.00306V18.9999Z" fill="#181A20"></path>
+                        </svg>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="truncate font-medium text-gray-900">Phú Quốc, Việt Nam</div>
+                        <p class="font-manrope font-medium text-[13px] leading-5 tracking-normal truncate text-gray-500">Sân bay Quốc tế Phú Quốc</p>
+                      </div>
+                    </div>
+                    <div class="ml-3 flex-shrink-0 self-end">
+                      <span class="self-end text-sm font-semibold text-gray-900">PQC</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -83,12 +140,85 @@
         
         <!-- Dropdown -->
         <div id="toDropdown" class="absolute z-10 w-full mt-1 bg-white border border-neutral-300 rounded-lg shadow-lg hidden">
-          <div class="py-1">
-            <div class="px-3 py-2 cursor-pointer hover:bg-gray-100" onclick="selectOption('to', 'Hà Nội', 'HAN')">
-              <span class="text-gray-900 font-semibold">Hà Nội (HAN)</span>
-            </div>
-            <div class="px-3 py-2 cursor-pointer hover:bg-gray-100" onclick="selectOption('to', 'Đà Nẵng', 'DAD')">
-              <span class="text-gray-900 font-semibold">Đà Nẵng (DAD)</span>
+          <div data-side="bottom" data-align="start" data-state="open" role="dialog" id="radix-«r6b»" data-slot="popover-content" class="text-popover-foreground z-50 origin-(--radix-popover-content-transform-origin) shadow-md outline-hidden bg-white w-[600px] rounded-lg border p-0 md:h-[500px]" tabindex="-1" style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);">
+            <div class="flex h-full flex-col">
+              <div class="bg-white flex-shrink-0 rounded-t-lg border-b p-4">
+          <div class="relative">
+            <input id="toSearch" placeholder="Tìm tỉnh, thành phố, sân bay" class="bg-white focus:bg-secondary w-full rounded-lg border border-gray-300 py-3 pr-10 pl-10 focus:outline-none" type="text" value="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform text-gray-400" aria-hidden="true">
+              <path d="m21 21-4.34-4.34"></path>
+              <circle cx="11" cy="11" r="8"></circle>
+            </svg>
+          </div>
+              </div>
+              <div class="flex-1 overflow-y-auto">
+          <div id="toList" class="bg-white space-y-2 border-b px-4 min-h-[420px] py-4">
+                  <div class="border-border-default flex cursor-pointer items-center justify-between border-b py-3 transition-colors hover:bg-gray-50 lg:rounded-lg lg:border-0 lg:p-3 bg-gray-100" data-city="Đà Nẵng" data-code="DAD" onclick="selectAirport('to', 'Đà Nẵng, Việt Nam', 'Sân bay Quốc tế Đà Nẵng', 'DAD')">
+                    <div class="flex min-w-0 flex-1 items-start gap-3">
+                      <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <path d="M21.9519 10.1117C22.1663 10.9119 21.6915 11.7344 20.8913 11.9488L5.22473 16.1466C4.78149 16.2654 4.31431 16.0673 4.09159 15.6661L1.46875 10.9414L2.91764 10.5532L5.38543 12.9978L10.4807 11.6325L5.97021 4.5589L7.90206 4.04126L14.8534 10.4608L20.1148 9.05107C20.915 8.83665 21.7375 9.31153 21.9519 10.1117ZM4.00306 18.9999H20.003V20.9999H4.00306V18.9999Z" fill="#181A20"></path>
+                        </svg>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="truncate font-medium text-gray-900">Đà Nẵng, Việt Nam</div>
+                        <p class="font-manrope font-medium text-[13px] leading-5 tracking-normal truncate text-gray-500">Sân bay Quốc tế Đà Nẵng</p>
+                      </div>
+                    </div>
+                    <div class="ml-3 flex-shrink-0 self-end">
+                      <span class="self-end text-sm font-semibold text-gray-900">DAD</span>
+                    </div>
+                  </div>
+                  <div class="border-border-default flex cursor-pointer items-center justify-between border-b py-3 transition-colors hover:bg-gray-50 lg:rounded-lg lg:border-0 lg:p-3" data-city="Hà Nội" data-code="HAN" onclick="selectAirport('to', 'Hà Nội, Việt Nam', 'Sân bay Quốc tế Nội Bài', 'HAN')">
+                    <div class="flex min-w-0 flex-1 items-start gap-3">
+                      <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <path d="M21.9519 10.1117C22.1663 10.9119 21.6915 11.7344 20.8913 11.9488L5.22473 16.1466C4.78149 16.2654 4.31431 16.0673 4.09159 15.6661L1.46875 10.9414L2.91764 10.5532L5.38543 12.9978L10.4807 11.6325L5.97021 4.5589L7.90206 4.04126L14.8534 10.4608L20.1148 9.05107C20.915 8.83665 21.7375 9.31153 21.9519 10.1117ZM4.00306 18.9999H20.003V20.9999H4.00306V18.9999Z" fill="#181A20"></path>
+                        </svg>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="truncate font-medium text-gray-900">Hà Nội, Việt Nam</div>
+                        <p class="font-manrope font-medium text-[13px] leading-5 tracking-normal truncate text-gray-500">Sân bay Quốc tế Nội Bài</p>
+                      </div>
+                    </div>
+                    <div class="ml-3 flex-shrink-0 self-end">
+                      <span class="self-end text-sm font-semibold text-gray-900">HAN</span>
+                    </div>
+                  </div>
+                  <div class="border-border-default flex cursor-pointer items-center justify-between border-b py-3 transition-colors hover:bg-gray-50 lg:rounded-lg lg:border-0 lg:p-3" data-city="TP. Hồ Chí Minh" data-code="SGN" onclick="selectAirport('to', 'TP. Hồ Chí Minh, Việt Nam', 'Sân bay Quốc tế Tân Sơn Nhất', 'SGN')">
+                    <div class="flex min-w-0 flex-1 items-start gap-3">
+                      <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <path d="M21.9519 10.1117C22.1663 10.9119 21.6915 11.7344 20.8913 11.9488L5.22473 16.1466C4.78149 16.2654 4.31431 16.0673 4.09159 15.6661L1.46875 10.9414L2.91764 10.5532L5.38543 12.9978L10.4807 11.6325L5.97021 4.5589L7.90206 4.04126L14.8534 10.4608L20.1148 9.05107C20.915 8.83665 21.7375 9.31153 21.9519 10.1117ZM4.00306 18.9999H20.003V20.9999H4.00306V18.9999Z" fill="#181A20"></path>
+                        </svg>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="truncate font-medium text-gray-900">TP. Hồ Chí Minh, Việt Nam</div>
+                        <p class="font-manrope font-medium text-[13px] leading-5 tracking-normal truncate text-gray-500">Sân bay Quốc tế Tân Sơn Nhất</p>
+                      </div>
+                    </div>
+                    <div class="ml-3 flex-shrink-0 self-end">
+                      <span class="self-end text-sm font-semibold text-gray-900">SGN</span>
+                    </div>
+                  </div>
+                  <div class="border-border-default flex cursor-pointer items-center justify-between border-b py-3 transition-colors hover:bg-gray-50 lg:rounded-lg lg:border-0 lg:p-3" data-city="Phú Quốc" data-code="PQC" onclick="selectAirport('to', 'Phú Quốc, Việt Nam', 'Sân bay Quốc tế Phú Quốc', 'PQC')">
+                    <div class="flex min-w-0 flex-1 items-start gap-3">
+                      <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <path d="M21.9519 10.1117C22.1663 10.9119 21.6915 11.7344 20.8913 11.9488L5.22473 16.1466C4.78149 16.2654 4.31431 16.0673 4.09159 15.6661L1.46875 10.9414L2.91764 10.5532L5.38543 12.9978L10.4807 11.6325L5.97021 4.5589L7.90206 4.04126L14.8534 10.4608L20.1148 9.05107C20.915 8.83665 21.7375 9.31153 21.9519 10.1117ZM4.00306 18.9999H20.003V20.9999H4.00306V18.9999Z" fill="#181A20"></path>
+                        </svg>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="truncate font-medium text-gray-900">Phú Quốc, Việt Nam</div>
+                        <p class="font-manrope font-medium text-[13px] leading-5 tracking-normal truncate text-gray-500">Sân bay Quốc tế Phú Quốc</p>
+                      </div>
+                    </div>
+                    <div class="ml-3 flex-shrink-0 self-end">
+                      <span class="self-end text-sm font-semibold text-gray-900">PQC</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -153,7 +283,7 @@
 
       <!-- Body -->
       <div id="tbody">
-        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)">
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-to="DAD">
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
@@ -171,9 +301,9 @@
           </div>
         </div>
 
-        <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)">
+        <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors hidden" data-title="Hà Nội (HAN) → TP. Hồ Chí Minh (SGN)" data-to="SGN">
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">TP. Hồ Chí Minh (SGN)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">08/11/2025</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
           <div class="w-[220px] flex justify-center items-center gap-3 px-2">
@@ -189,7 +319,7 @@
           </div>
         </div>
 
-        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)">
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-to="DAD">
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
@@ -207,7 +337,7 @@
           </div>
         </div>
 
-        <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)">
+        <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-to="DAD">
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">11/11/2025</div>
@@ -225,9 +355,9 @@
           </div>
         </div>
 
-        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)">
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors hidden" data-title="Hà Nội (HAN) → Phú Quốc (PQC)" data-to="PQC">
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Phú Quốc (PQC)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">12/11/2025</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
           <div class="w-[220px] flex justify-center items-center gap-3 px-2">
@@ -243,7 +373,7 @@
           </div>
         </div>
 
-        <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)">
+        <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-to="DAD">
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">13/11/2025</div>
@@ -261,7 +391,7 @@
           </div>
         </div>
 
-       <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)">
+       <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-to="DAD">
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
@@ -269,7 +399,7 @@
           <div class="w-[220px] flex justify-center items-center gap-3 px-2">
             <div>
               <div class="flex items-baseline gap-1 text-sm">
-                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.178.000*</span>
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.778.000*</span>
               </div>
               <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
             </div>
@@ -279,7 +409,7 @@
           </div>
         </div>
 
-        <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)">
+        <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-to="DAD">
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">08/11/2025</div>
@@ -287,9 +417,82 @@
           <div class="w-[220px] flex justify-center items-center gap-3 px-2">
             <div>
               <div class="flex items-baseline gap-1 text-sm">
-                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">2.350.000*</span>
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">2.450.000*</span>
               </div>
               <div class="text-xs text-neutral-700 font-normal">Đã xem: 1h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Additional rows for other from locations -->
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors hidden" data-title="TP. Hồ Chí Minh (SGN) → Đà Nẵng (DAD)" data-to="DAD">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">TP. Hồ Chí Minh (SGN)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">09/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">950.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 4h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors hidden" data-title="TP. Hồ Chí Minh (SGN) → Đà Nẵng (DAD)" data-to="DAD">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">TP. Hồ Chí Minh (SGN)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">14/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.800.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors hidden" data-title="Phú Quốc (PQC) → Đà Nẵng (DAD)" data-to="DAD">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Phú Quốc (PQC)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">15/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.500.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 1h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors hidden" data-title="Phú Quốc (PQC) → Đà Nẵng (DAD)" data-to="DAD">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Phú Quốc (PQC)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">16/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">2.700.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 30m trước</div>
             </div>
             <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
               <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -398,15 +601,105 @@
               </div>
             </div>
 
-            <div class="flex items-end border-b border-neutral-400 p-[8px]">
-              <div class="flex-1 h-[54px] flex flex-col justify-between">
+            <div class="relative flex items-end border-b border-neutral-400 p-[8px]">
+              <div class="flex-1 h-[54px] flex flex-col justify-between" onclick="togglePassengerDropdown()">
                 <div class="text-sm text-gray-700 font-medium mb-1">
                   Hành khách
                 </div>
-                <div class="text-base font-semibold text-gray-900">1 Hành khách</div>
+                <div class="text-base font-semibold text-gray-900 cursor-pointer" id="passengerDisplay">1 Hành khách</div>
               </div>
               <div class="self-start">
-                <img src="https://booking-1f5.pages.dev/Vector.png" class="w-4 h-4" />
+                <img src="https://booking-1f5.pages.dev/Vector.png" class="w-4 h-4 cursor-pointer" onclick="togglePassengerDropdown()" />
+              </div>
+              <!-- Passenger Dropdown -->
+              <div id="passengerDropdown" class="absolute z-20 left-0 top-full bg-white border border-neutral-300 rounded-lg shadow-lg hidden w-72 lg:w-[612px] min-h-[270px]">
+                <div class="flex h-full flex-col">
+                  <div class="flex-1 p-4">
+                    <div class="flex flex-col gap-4 sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 md:gap-6">
+                      <div class="flex flex-col gap-4">
+                        <div class="mb-auto hidden md:block">
+                          <div class="flex flex-col items-start gap-2 rounded-md p-3 text-sm text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden="true">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <path d="M12 16v-4"></path>
+                              <path d="M12 8h.01"></path>
+                            </svg>
+                            <span class="text-content-secondary text-xs font-medium">Passengers under 14 years old need the consent of a legal representative to book.</span>
+                          </div>
+                        </div>
+                        <div class="mt-auto hidden md:block"></div>
+                      </div>
+                      <div class="flex flex-col">
+                        <div class="bg-ceramic-yellow-50 flex flex-col gap-4 py-3">
+                          <div class="flex items-center justify-between px-4">
+                            <div>
+                              <div class="font-medium text-gray-900">Người lớn</div>
+                              <div class="text-sm text-gray-500">Từ 12 tuổi trở lên</div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                              <button id="adultMinus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0" onclick="updatePassengerCount('adult', -1)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus h-4 w-4" aria-hidden="true">
+                                  <path d="M5 12h14"></path>
+                                </svg>
+                              </button>
+                              <span id="adultCount" class="w-8 text-center font-medium">1</span>
+                              <button id="adultPlus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0" onclick="updatePassengerCount('adult', 1)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4" aria-hidden="true">
+                                  <path d="M5 12h14"></path>
+                                  <path d="M12 5v14"></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                          <div class="flex items-center justify-between px-4">
+                            <div>
+                              <div class="font-medium text-gray-900">Trẻ em</div>
+                              <div class="text-sm text-gray-500">Từ 2-11 tuổi</div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                              <button id="childMinus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0 disabled:opacity-50" onclick="updatePassengerCount('child', -1)" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus h-4 w-4" aria-hidden="true">
+                                  <path d="M5 12h14"></path>
+                                </svg>
+                              </button>
+                              <span id="childCount" class="w-8 text-center font-medium">0</span>
+                              <button id="childPlus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0" onclick="updatePassengerCount('child', 1)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4" aria-hidden="true">
+                                  <path d="M5 12h14"></path>
+                                  <path d="M12 5v14"></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                          <div class="flex items-center justify-between px-4">
+                            <div>
+                              <div class="font-medium text-gray-900">Em bé</div>
+                              <div class="text-sm text-gray-500">Dưới 2 tuổi, ngồi lòng</div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                              <button id="infantMinus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0 disabled:opacity-50" onclick="updatePassengerCount('infant', -1)" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus h-4 w-4" aria-hidden="true">
+                                  <path d="M5 12h14"></path>
+                                </svg>
+                              </button>
+                              <span id="infantCount" class="w-8 text-center font-medium">0</span>
+                              <button id="infantPlus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0" onclick="updatePassengerCount('infant', 1)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4" aria-hidden="true">
+                                  <path d="M5 12h14"></path>
+                                  <path d="M12 5v14"></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="flex flex-col gap-2 pt-2 sm:flex-row">
+                          <button class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex items-center justify-center gap-1 !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 border-input bg-background border h-9 px-4 py-2 has-[>svg]:px-3 flex-1" onclick="resetPassengers()">Reset</button>
+                          <button class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex items-center justify-center gap-1 !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 text-white shadow-xs h-9 px-4 py-2 has-[>svg]:px-3 flex-1 bg-gray-800 hover:bg-gray-900" onclick="closePassengerDropdown()">Done</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 

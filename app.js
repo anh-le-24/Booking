@@ -1,6 +1,13 @@
 let currentMonth, currentYear;
 let departureDate = '';
 let returnDate = '';
+let currentFromCode = 'HAN';
+let currentToCode = 'DAD';
+
+// Passenger counts
+let adultCount = 1;
+let childCount = 0;
+let infantCount = 0;
 
 // Datepicker functions
 function initDatePicker(dateStr = null) {
@@ -178,6 +185,76 @@ document.addEventListener('click', function(event) {
   }
 });
 
+// Passenger functions
+function togglePassengerDropdown() {
+  const dropdown = document.getElementById('passengerDropdown');
+  dropdown.classList.toggle('hidden');
+  if (!dropdown.classList.contains('hidden')) {
+    updatePassengerButtons();
+  }
+}
+
+function closePassengerDropdown() {
+  document.getElementById('passengerDropdown').classList.add('hidden');
+  updatePassengerDisplay();
+}
+
+function resetPassengers() {
+  adultCount = 1;
+  childCount = 0;
+  infantCount = 0;
+  updatePassengerCounts();
+  updatePassengerButtons();
+}
+
+function updatePassengerCount(type, delta) {
+  switch (type) {
+    case 'adult':
+      adultCount = Math.max(1, adultCount + delta);
+      break;
+    case 'child':
+      childCount = Math.max(0, childCount + delta);
+      break;
+    case 'infant':
+      infantCount = Math.max(0, infantCount + delta);
+      break;
+  }
+  updatePassengerCounts();
+  updatePassengerButtons();
+}
+
+function updatePassengerCounts() {
+  document.getElementById('adultCount').textContent = adultCount;
+  document.getElementById('childCount').textContent = childCount;
+  document.getElementById('infantCount').textContent = infantCount;
+}
+
+function updatePassengerButtons() {
+  // Adult minus disabled if 1
+  const adultMinus = document.getElementById('adultMinus');
+  adultMinus.disabled = adultCount <= 1;
+
+  // Child minus disabled if 0
+  const childMinus = document.getElementById('childMinus');
+  childMinus.disabled = childCount <= 0;
+
+  // Infant minus disabled if 0
+  const infantMinus = document.getElementById('infantMinus');
+  infantMinus.disabled = infantCount <= 0;
+
+  // Optionally disable plus if total too high, but no limit here
+}
+
+function updatePassengerDisplay() {
+  const total = adultCount + childCount + infantCount;
+  const display = document.getElementById('passengerDisplay');
+  if (total === 1) {
+    display.textContent = '1 Hành khách';
+  } else {
+    display.textContent = `${total} Hành khách`;
+  }
+}
+
 // Swap airports function
 function swapAirports() {
   const modalFromCode = document.getElementById('modalFromCode');
@@ -209,6 +286,57 @@ function swapAirports() {
   });
 }
 
+// New function for selecting airport from complex dropdown
+function selectAirport(prefix, fullCity, airportName, code) {
+  const cityEl = document.getElementById(prefix + 'City');
+  const codeEl = document.getElementById(prefix + 'Code');
+  if (cityEl) cityEl.textContent = fullCity.split(',')[0]; // Extract city name
+  if (codeEl) codeEl.textContent = code;
+  
+  // Highlight selected item in dropdown
+  highlightSelectedItem(prefix, code);
+  
+  // Update current codes and filter table
+  if (prefix === 'from') {
+    currentFromCode = code;
+    filterTable(currentFromCode, currentToCode);
+  } else if (prefix === 'to') {
+    currentToCode = code;
+    filterTable(currentFromCode, currentToCode);
+  }
+  
+  toggleDropdown(prefix);
+}
+
+// Function to highlight selected item
+function highlightSelectedItem(prefix, code) {
+  const listItems = document.querySelectorAll(`#${prefix}List > div[data-code]`);
+  listItems.forEach(item => {
+    item.classList.remove('bg-gray-100');
+  });
+  const selectedItem = Array.from(listItems).find(item => item.getAttribute('data-code') === code);
+  if (selectedItem) {
+    selectedItem.classList.add('bg-gray-100');
+  }
+}
+
+// Function to filter table rows based on selected from and to codes
+function filterTable(fromCode, toCode) {
+  const rows = document.querySelectorAll('#tbody > div');
+  rows.forEach(row => {
+    const fromCell = row.children[0].textContent.trim();
+    const fromMatch = fromCell.match(/([A-Z]{3})\)$/);
+    const rowFromCode = fromMatch ? fromMatch[1] : '';
+    const rowToCode = row.getAttribute('data-to') || '';
+
+    if (rowFromCode === fromCode && rowToCode === toCode) {
+      row.classList.remove('hidden');
+    } else {
+      row.classList.add('hidden');
+    }
+  });
+}
+
 // Dropdown management
 function toggleDropdown(prefix) {
   // Close all dropdowns first
@@ -223,21 +351,72 @@ function toggleDropdown(prefix) {
   const dropdown = document.getElementById(prefix + 'Dropdown');
   if (dropdown) {
     dropdown.classList.toggle('hidden');
+    if (!dropdown.classList.contains('hidden')) {  // Khi mở, reset search và hiển thị tất cả
+      const searchInput = document.getElementById(prefix + 'Search');
+      if (searchInput) {
+        searchInput.value = '';  // Xóa query
+      }
+      const listItems = document.querySelectorAll(`#${prefix}List > div[data-city]`);
+      listItems.forEach(item => item.classList.remove('hidden'));  // Hiển thị tất cả
+      // Re-highlight current selection
+      const currentCodeEl = document.getElementById(prefix + 'Code');
+      if (currentCodeEl) {
+        const currentCode = currentCodeEl.textContent.trim();
+        highlightSelectedItem(prefix, currentCode);
+      }
+    }
   }
 }
 
-function selectOption(prefix, city, code = '') {
+function selectOption(prefix, value, code = '') {
   if (prefix === 'budget') {
     const valueEl = document.getElementById('budgetValue');
-    if (valueEl) valueEl.textContent = city;
+    if (valueEl) valueEl.textContent = value;
   } else {
     const cityEl = document.getElementById(prefix + 'City');
     const codeEl = document.getElementById(prefix + 'Code');
-    if (cityEl) cityEl.textContent = city;
+    if (cityEl) cityEl.textContent = value;
     if (codeEl && code) codeEl.textContent = code;
   }
 
   toggleDropdown(prefix);
+}
+
+// Search filtering for dropdowns (cập nhật để hiển thị tất cả khi không có query)
+function setupSearchFilter() {
+  // For from dropdown
+  const fromSearch = document.getElementById('fromSearch');
+  const fromListItems = document.querySelectorAll('#fromList > div[data-city]');
+  if (fromSearch) {
+    fromSearch.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      fromListItems.forEach(item => {
+        const city = item.getAttribute('data-city').toLowerCase();
+        if (!query || city.includes(query)) {  // Hiển thị tất cả nếu query rỗng
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  }
+
+  // For to dropdown (tương tự)
+  const toSearch = document.getElementById('toSearch');
+  const toListItems = document.querySelectorAll('#toList > div[data-city]');
+  if (toSearch) {
+    toSearch.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      toListItems.forEach(item => {
+        const city = item.getAttribute('data-city').toLowerCase();
+        if (!query || city.includes(query)) {  // Hiển thị tất cả nếu query rỗng
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  }
 }
 
 // Close dropdowns on outside click
@@ -257,6 +436,13 @@ document.addEventListener('click', function(event) {
         dropdown.classList.add('hidden');
       }
     });
+  }
+
+  // Close passenger dropdown if clicked outside
+  const passengerDisplay = document.getElementById('passengerDisplay');
+  const passengerDropdown = document.getElementById('passengerDropdown');
+  if (passengerDisplay && !passengerDisplay.contains(event.target) && passengerDropdown && !passengerDropdown.contains(event.target)) {
+    passengerDropdown.classList.add('hidden');
   }
 });
 
@@ -289,6 +475,9 @@ document.querySelectorAll('.open-modal').forEach(row => {
       returnDate = '';
     }
     
+    // Reset passengers
+    resetPassengers();
+    
     // Update title with route
     const title = row.getAttribute('data-title');
     const modalTitle = document.getElementById('modalTitle');
@@ -306,7 +495,7 @@ document.querySelectorAll('.open-modal').forEach(row => {
     const fromCodeEl = document.getElementById('modalFromCode');
     const fromCityEl = document.getElementById('modalFromCity');
     if (fromCodeEl && fromCityEl) {
-      const fromMatch = fromCell.match(/([A-Z]{3})$/);
+      const fromMatch = fromCell.match(/([A-Z]{3})\)$/);
       const fromCode = fromMatch ? fromMatch[1] : 'HAN';
       const fromCity = fromCell.replace(/\s*\([A-Z]{3}\)/, '');
       fromCodeEl.textContent = fromCode;
@@ -318,7 +507,7 @@ document.querySelectorAll('.open-modal').forEach(row => {
     const toCityEl = document.getElementById('modalToCity');
     const toCountryEl = document.querySelector('div.flex-1.flex.flex-col.justify-center.items-center:last-child div:last-child');
     if (toCodeEl && toCityEl) {
-      const toMatch = toCell.match(/([A-Z]{3})$/);
+      const toMatch = toCell.match(/([A-Z]{3})\)$/);
       const toCode = toMatch ? toMatch[1] : 'DAD';
       const toCity = toCell.replace(/\s*\([A-Z]{3}\)/, '');
       toCodeEl.textContent = toCode;
@@ -373,6 +562,7 @@ modal.addEventListener('click', (e) => {
     modal.classList.add('hidden');
     modal.classList.remove('flex');
     hideDatePicker();
+    closePassengerDropdown();
     departureDate = '';
     returnDate = '';
   }
@@ -381,4 +571,19 @@ modal.addEventListener('click', (e) => {
 document.querySelectorAll('input[type="radio"]').forEach(radio => {
   radio.addEventListener('change', function() {
   });
+});
+
+// Initialize search filters on load
+document.addEventListener('DOMContentLoaded', function() {
+  setupSearchFilter();
+  // Initial highlight for from (HAN)
+  highlightSelectedItem('from', 'HAN');
+  // Initial highlight for to (DAD)
+  highlightSelectedItem('to', 'DAD');
+  // Initial filter for table (default to HAN -> DAD)
+  filterTable(currentFromCode, currentToCode);
+  // Initial passenger setup
+  updatePassengerCounts();
+  updatePassengerButtons();
+  updatePassengerDisplay();
 });
