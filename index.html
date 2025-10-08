@@ -237,48 +237,81 @@
           <!-- Dropdown -->
           <div id="budgetDropdown" class="absolute z-10 w-full mt-1 bg-white border border-neutral-300 rounded-lg shadow-lg hidden">
             <div class="py-1 space-y-1">
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="Tất cả giá" onclick="selectOption('budget', 'Tất cả giá'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="Tất cả giá" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">Tất cả giá</span>
               </label>
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="1-2 triệu VND" onclick="selectOption('budget', '1-2 triệu VND'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="1-2 triệu VND" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">1-2 triệu VND</span>
               </label>
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="2-3 triệu VND" onclick="selectOption('budget', '2-3 triệu VND'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="2-3 triệu VND" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">2-3 triệu VND</span>
               </label>
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="3-4 triệu VND" onclick="selectOption('budget', '3-4 triệu VND'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="3-4 triệu VND" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">3-4 triệu VND</span>
               </label>
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="4-5 triệu VND" onclick="selectOption('budget', '4-5 triệu VND'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="4-5 triệu VND" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">4-5 triệu VND</span>
               </label>
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="5-6 triệu VND" onclick="selectOption('budget', '5-6 triệu VND'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="5-6 triệu VND" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">5-6 triệu VND</span>
               </label>
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="6-7 triệu VND" onclick="selectOption('budget', '6-7 triệu VND'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="6-7 triệu VND" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">6-7 triệu VND</span>
               </label>
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="7-8 triệu VND" onclick="selectOption('budget', '7-8 triệu VND'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="7-8 triệu VND" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">7-8 triệu VND</span>
               </label>
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="8-9 triệu VND" onclick="selectOption('budget', '8-9 triệu VND'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="8-9 triệu VND" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">8-9 triệu VND</span>
               </label>
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="9-10 triệu VND" onclick="selectOption('budget', '9-10 triệu VND'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="9-10 triệu VND" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">9-10 triệu VND</span>
               </label>
-              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded" data-value="Trên 10 triệu VND" onclick="selectOption('budget', 'Trên 10 triệu VND'); event.stopPropagation();">
-                <span class="radio-span w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center mr-3"></span>
+              <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
+                <input type="radio" name="budget" value="Trên 10 triệu VND" class="hidden peer" onchange="selectOption('budget', this.value)" />
+                <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
+                  <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+                </span>
                 <span class="text-gray-900 font-semibold">Trên 10 triệu VND</span>
               </label>
             </div>
@@ -289,7 +322,6 @@
     <!-- Table -->
     <div class="border border-neutral-300 rounded-[10px]">
       <!-- Header -->
-         <!-- Header -->
       <div class="flex items-center h-12 bg-ceramic-yellow-300">
         <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('from')">
           <span class="font-bold text-sm">Điểm đi</span>
@@ -484,7 +516,125 @@
             </button>
           </div>
         </div>
-
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.178.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.178.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.178.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.178.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.178.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.178.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
+          <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+          <div class="w-[220px] flex justify-center items-center gap-3 px-2">
+            <div>
+              <div class="flex items-baseline gap-1 text-sm">
+                <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.178.000*</span>
+              </div>
+              <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+            </div>
+            <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
         <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors hidden" data-from="HAN" data-to="SGN" data-title="Hà Nội (HAN) → TP. Hồ Chí Minh (SGN)" data-price="2350000">
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
           <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">TP. Hồ Chí Minh (SGN)</div>
@@ -654,7 +804,7 @@
           <label class="inline-flex items-center gap-2 cursor-pointer">
             <input type="radio" name="trip" value="Khứ hồi" class="hidden peer" />
             <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
-          <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
             </span>
             <span class="font-semibold text-gray-900 text-sm">Khứ hồi</span>
           </label>
@@ -877,7 +1027,6 @@
                         </div>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>

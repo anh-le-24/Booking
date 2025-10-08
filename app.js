@@ -596,7 +596,13 @@ function selectOption(prefix, value) {
   if (prefix === 'budget') {
     const valueEl = document.getElementById('budgetValue');
     if (valueEl) valueEl.textContent = value;
-    highlightSelectedBudgetOption(value);
+
+    // Set checked cho radio đúng
+    const radios = document.querySelectorAll('input[name="budget"]');
+    radios.forEach(radio => {
+      radio.checked = radio.value === value;
+    });
+
     filterTable();
   }
   const dropdown = document.getElementById(prefix + 'Dropdown');
@@ -961,7 +967,6 @@ document.addEventListener('click', function(e) {
     const btn = document.getElementById('loadMoreBtn');
 
     function getAllRowEls() {
-      // Lấy các DIV con trực tiếp trong tbody (mỗi item là 1 div hàng)
       return Array.from(tbody ? tbody.children : []).filter(el => el.tagName === 'DIV');
     }
 
@@ -970,17 +975,14 @@ document.addEventListener('click', function(e) {
 
       const rows = getAllRowEls();
 
-      // Ghi nhận trạng thái ẩn ban đầu để không làm lộ các item bị ẩn vì lý do khác (filter, route...)
       rows.forEach(row => {
         if (!row.dataset.originalHidden) {
           row.dataset.originalHidden = row.classList.contains('hidden') ? '1' : '0';
         }
       });
 
-      // Chỉ phân trang với các item KHÔNG ẩn sẵn từ đầu
       const candidates = rows.filter(r => r.dataset.originalHidden === '0');
 
-      // Reset phân trang cũ (nếu có)
       candidates.forEach(r => {
         if (r.dataset.managed === '1') {
           r.classList.remove('hidden');
@@ -988,17 +990,15 @@ document.addEventListener('click', function(e) {
         r.dataset.managed = '0';
       });
 
-      // Áp dụng hiển thị 10 item đầu, ẩn phần còn lại
       candidates.forEach((row, idx) => {
-        row.dataset.managed = '1'; // cờ đánh dấu do phân trang quản lý
+        row.dataset.managed = '1'; 
         if (idx >= PAGE_SIZE) {
-          row.classList.add('hidden'); // ẩn phần thừa
+          row.classList.add('hidden'); 
         } else {
           row.classList.remove('hidden');
         }
       });
 
-      // Hiện/ẩn nút "Xem thêm"
       const remaining = candidates.filter(r => r.dataset.managed === '1' && r.classList.contains('hidden'));
       if (remaining.length > 0) {
         btn.classList.remove('hidden');
@@ -1013,7 +1013,6 @@ document.addEventListener('click', function(e) {
       for (let i = 0; i < count; i++) {
         rows[i].classList.remove('hidden');
       }
-      // Ẩn nút nếu đã hiển thị hết
       if (rows.length <= PAGE_SIZE) {
         btn.classList.add('hidden');
       }
@@ -1030,19 +1029,26 @@ document.addEventListener('click', function(e) {
   })();
 
 // ================== INIT ==================
+// ...existing code...
 document.addEventListener('DOMContentLoaded', function() {
   setupSearchFilter();
   highlightSelectedItem('from', 'HAN');
   highlightSelectedItem('to', 'DAD');
 
-  // Set budget default THỦ CÔNG (không toggle)
+  // Set budget default
   const budgetValue = document.getElementById('budgetValue');
   if (budgetValue) budgetValue.textContent = 'Tất cả giá';
-  highlightSelectedBudgetOption('Tất cả giá');
+
+  const budgetRadios = document.querySelectorAll('input[name="budget"]');
+  budgetRadios.forEach(radio => {
+    radio.checked = radio.value === 'Tất cả giá';
+  });
 
   updatePassengerCounts();
   updatePassengerButtons();
   updatePassengerDisplay();
+
+  filterTable();
 
   // Modals: open by row click (event delegation)
   document.addEventListener('click', function(e) {
