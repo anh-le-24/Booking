@@ -794,6 +794,16 @@ document.addEventListener('mousedown', function (e) {
   }
 });
 
+document.addEventListener('mousedown', function(e) {
+  const datepicker = document.getElementById('datepicker');
+  const modalDate = document.getElementById('modalDate');
+  if (!datepicker || datepicker.classList.contains('hidden')) return;
+
+  // Nếu click không nằm trong datepicker hoặc nút mở datepicker thì đóng
+  if (!datepicker.contains(e.target) && e.target !== modalDate) {
+    hideDatePicker();
+  }
+});
 
 // ================== OUTSIDE CLICK (outer dropdowns & passenger) ==================
 document.addEventListener('click', function(event) {
@@ -945,6 +955,79 @@ document.addEventListener('click', function(e) {
   }
 });
 
+ (function () {
+    const PAGE_SIZE = 10;
+    const tbody = document.getElementById('tbody');
+    const btn = document.getElementById('loadMoreBtn');
+
+    function getAllRowEls() {
+      // Lấy các DIV con trực tiếp trong tbody (mỗi item là 1 div hàng)
+      return Array.from(tbody ? tbody.children : []).filter(el => el.tagName === 'DIV');
+    }
+
+    function initPagination() {
+      if (!tbody || !btn) return;
+
+      const rows = getAllRowEls();
+
+      // Ghi nhận trạng thái ẩn ban đầu để không làm lộ các item bị ẩn vì lý do khác (filter, route...)
+      rows.forEach(row => {
+        if (!row.dataset.originalHidden) {
+          row.dataset.originalHidden = row.classList.contains('hidden') ? '1' : '0';
+        }
+      });
+
+      // Chỉ phân trang với các item KHÔNG ẩn sẵn từ đầu
+      const candidates = rows.filter(r => r.dataset.originalHidden === '0');
+
+      // Reset phân trang cũ (nếu có)
+      candidates.forEach(r => {
+        if (r.dataset.managed === '1') {
+          r.classList.remove('hidden');
+        }
+        r.dataset.managed = '0';
+      });
+
+      // Áp dụng hiển thị 10 item đầu, ẩn phần còn lại
+      candidates.forEach((row, idx) => {
+        row.dataset.managed = '1'; // cờ đánh dấu do phân trang quản lý
+        if (idx >= PAGE_SIZE) {
+          row.classList.add('hidden'); // ẩn phần thừa
+        } else {
+          row.classList.remove('hidden');
+        }
+      });
+
+      // Hiện/ẩn nút "Xem thêm"
+      const remaining = candidates.filter(r => r.dataset.managed === '1' && r.classList.contains('hidden'));
+      if (remaining.length > 0) {
+        btn.classList.remove('hidden');
+      } else {
+        btn.classList.add('hidden');
+      }
+    }
+
+    function loadMore() {
+      const rows = getAllRowEls().filter(r => r.dataset.managed === '1' && r.classList.contains('hidden'));
+      const count = Math.min(PAGE_SIZE, rows.length);
+      for (let i = 0; i < count; i++) {
+        rows[i].classList.remove('hidden');
+      }
+      // Ẩn nút nếu đã hiển thị hết
+      if (rows.length <= PAGE_SIZE) {
+        btn.classList.add('hidden');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initPagination);
+    btn && btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      loadMore();
+    });
+
+    // Expose để gọi lại khi dữ liệu thay đổi (nếu bạn filter hoặc load thêm DOM)
+    window.refreshLoadMore = initPagination;
+  })();
 
 // ================== INIT ==================
 document.addEventListener('DOMContentLoaded', function() {
