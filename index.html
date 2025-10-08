@@ -51,8 +51,8 @@
         <label class="block text-xs text-neutral-700 mb-1 font-normal">Từ</label>
         <div id="fromDisplay" class="flex items-center h-8 py-1 rounded-lg bg-white text-gray-900 font-semibold focus:outline-none transition cursor-pointer" onclick="toggleDropdown('from')">
           <div class="flex justify-between w-full">
-            <span id="fromCity" class="text-[24px] text-gray-900">Hà Nội</span>
-            <span id="fromCode" class="text-[24px] text-gray-900">HAN</span>
+            <span id="fromCity" class="text-[18px] text-gray-900">Hà Nội</span>
+            <span id="fromCode" class="text-[18px] text-gray-900">HAN</span>
           </div>
           <img src="https://booking-1f5.pages.dev/tam.png" class="w-[12px] h-[6px] ml-2" />
         </div>
@@ -132,8 +132,8 @@
         <label class="block text-xs text-neutral-700 mb-1 font-normal">Đến</label>
         <div id="toDisplay" class="flex items-center h-8 py-1 rounded-lg bg-white text-gray-900 font-semibold focus:outline-none transition cursor-pointer" onclick="toggleDropdown('to')">
           <div class="flex justify-between w-full">
-            <span id="toCity" class="text-[24px] text-gray-900">Đà Nẵng</span>
-            <span id="toCode" class="text-[24px] text-gray-900">DAD</span>
+            <span id="toCity" class="text-[18px] text-gray-900">Đà Nẵng</span>
+            <span id="toCode" class="text-[18px] text-gray-900">DAD</span>
           </div>
           <img src="https://booking-1f5.pages.dev/tam.png" class="w-[12px] h-[6px] ml-2" />
         </div>
@@ -229,7 +229,7 @@
           <label class="block text-xs text-neutral-700 mb-1 font-normal">Ngân sách tối đa</label>
           <div id="budgetDisplay" class="flex items-center h-8 py-1 rounded-lg bg-white text-gray-900 font-semibold focus:outline-none transition cursor-pointer" onclick="toggleDropdown('budget')">
             <div class="flex justify-between w-full">
-              <span id="budgetValue" class="text-[24px] text-gray-900">Tất cả giá</span>
+              <span id="budgetValue" class="text-[18px] text-gray-900">Tất cả giá</span>
             </div>
             <img src="https://booking-1f5.pages.dev/tam.png" class="w-[12px] h-[6px] ml-2" />
           </div>
@@ -323,25 +323,21 @@
     <div class="border border-neutral-300 rounded-[10px]">
       <!-- Header -->
       <div class="flex items-center h-12 bg-ceramic-yellow-300">
-        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('from')">
+        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer">
           <span class="font-bold text-sm">Điểm đi</span>
-          <svg class="w-6 h-6 text-black ml-2" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('to')">
+        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer">
           <span class="font-bold text-sm">Điểm đến</span>
-          <svg class="w-6 h-6 text-black ml-2" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('date')">
+        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer">
           <span class="font-bold text-sm">Ngày đi</span>
-          <svg class="w-6 h-6 text-black ml-2" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('type')">
           <span class="font-bold text-sm">Loại vé</span>
           <svg class="w-6 h-6 text-black ml-2" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="w-[220px] flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('price')">
+        <div class="w-[220px] flex items-center justify-center px-2 gap-2 cursor-pointer">
           <span class="font-bold text-sm">Giá</span>
-          <svg class="w-6 h-6 text-black ml-2" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </div>
      <!-- Body -->
@@ -418,7 +414,7 @@
         <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
         <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
         <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
         <div class="w-[220px] flex justify-center items-center gap-3 px-2">
           <div>
             <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
@@ -481,7 +477,7 @@
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
               <div class="w-[220px] flex justify-center items-center gap-3 px-2">
                 <div>
                   <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
@@ -522,7 +518,7 @@
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
               <div class="w-[220px] flex justify-center items-center gap-3 px-2">
                 <div>
                   <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
@@ -562,7 +558,7 @@
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
               <div class="w-[220px] flex justify-center items-center gap-3 px-2">
                 <div>
                   <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
@@ -602,7 +598,7 @@
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
               <div class="w-[220px] flex justify-center items-center gap-3 px-2">
                 <div>
                   <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
@@ -642,7 +638,7 @@
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
               <div class="w-[220px] flex justify-center items-center gap-3 px-2">
                 <div>
                   <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
@@ -682,7 +678,7 @@
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
               <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
+              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
               <div class="w-[220px] flex justify-center items-center gap-3 px-2">
                 <div>
                   <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
