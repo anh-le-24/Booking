@@ -289,25 +289,29 @@
     <!-- Table -->
     <div class="border border-neutral-300 rounded-[10px]">
       <!-- Header -->
+         <!-- Header -->
       <div class="flex items-center h-12 bg-ceramic-yellow-300">
-        <div class="flex-1 flex items-center justify-center px-2 gap-2">
+        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('from')">
           <span class="font-bold text-sm">Điểm đi</span>
+          <svg class="w-6 h-6 text-black ml-2" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="flex-1 flex items-center justify-center px-2 gap-2">
+        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('to')">
           <span class="font-bold text-sm">Điểm đến</span>
+          <svg class="w-6 h-6 text-black ml-2" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="flex-1 flex items-center justify-center px-2 gap-2">
+        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('date')">
           <span class="font-bold text-sm">Ngày đi</span>
+          <svg class="w-6 h-6 text-black ml-2" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="flex-1 flex items-center justify-center px-2 gap-2">
+        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('type')">
           <span class="font-bold text-sm">Loại vé</span>
           <svg class="w-6 h-6 text-black ml-2" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="w-[220px] flex items-center justify-center px-2 gap-2">
+        <div class="w-[220px] flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('price')">
           <span class="font-bold text-sm">Giá</span>
+          <svg class="w-6 h-6 text-black ml-2" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </div>
-
      <!-- Body -->
       <div id="tbody">
         <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors" data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">

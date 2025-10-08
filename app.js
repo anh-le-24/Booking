@@ -1052,3 +1052,68 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+let sortState = {
+  from: 'asc',
+  to: 'asc',
+  date: 'asc',
+  type: 'asc',
+  price: 'asc'
+};
+
+function sortTable(type) {
+  const tbody = document.getElementById('tbody');
+  if (!tbody) return;
+  const rows = Array.from(tbody.children);
+
+  let sortedRows;
+  if (type === 'price') {
+    sortedRows = rows.sort((a, b) => {
+      const priceA = parseInt(a.getAttribute('data-price'), 10);
+      const priceB = parseInt(b.getAttribute('data-price'), 10);
+      return sortState.price === 'asc' ? priceA - priceB : priceB - priceA;
+    });
+    sortState.price = sortState.price === 'asc' ? 'desc' : 'asc';
+  } else if (type === 'date') {
+    sortedRows = rows.sort((a, b) => {
+      const dateA = a.children[2].textContent.trim().split('/').reverse().join('-');
+      const dateB = b.children[2].textContent.trim().split('/').reverse().join('-');
+      return sortState.date === 'asc'
+        ? new Date(dateA) - new Date(dateB)
+        : new Date(dateB) - new Date(dateA);
+    });
+    sortState.date = sortState.date === 'asc' ? 'desc' : 'asc';
+  } else if (type === 'from') {
+    sortedRows = rows.sort((a, b) => {
+      const fromA = a.children[0].textContent.trim();
+      const fromB = b.children[0].textContent.trim();
+      return sortState.from === 'asc'
+        ? fromA.localeCompare(fromB)
+        : fromB.localeCompare(fromA);
+    });
+    sortState.from = sortState.from === 'asc' ? 'desc' : 'asc';
+  } else if (type === 'to') {
+    sortedRows = rows.sort((a, b) => {
+      const toA = a.children[1].textContent.trim();
+      const toB = b.children[1].textContent.trim();
+      return sortState.to === 'asc'
+        ? toA.localeCompare(toB)
+        : toB.localeCompare(toA);
+    });
+    sortState.to = sortState.to === 'asc' ? 'desc' : 'asc';
+  } else if (type === 'type') {
+    sortedRows = rows.sort((a, b) => {
+      const typeA = a.children[3].textContent.trim();
+      const typeB = b.children[3].textContent.trim();
+      return sortState.type === 'asc'
+        ? typeA.localeCompare(typeB)
+        : typeB.localeCompare(typeA);
+    });
+    sortState.type = sortState.type === 'asc' ? 'desc' : 'asc';
+  } else {
+    return;
+  }
+
+  tbody.innerHTML = '';
+  sortedRows.forEach(row => tbody.appendChild(row));
+}
