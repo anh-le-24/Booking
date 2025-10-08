@@ -552,6 +552,9 @@ function filterTable() {
       row.classList.add('hidden');
     }
   });
+
+  // Thêm dòng này để phân trang lại sau khi lọc
+  if (window.refreshLoadMore) window.refreshLoadMore();
 }
 
 function highlightSelectedItem(prefix, code) {
