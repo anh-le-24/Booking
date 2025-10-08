@@ -512,7 +512,7 @@ function selectAirport(prefix, fullCity, airportName, code) {
     currentFromCode = code;
   } else if (prefix === 'to') {
     currentToCode = code;
-  }
+  }toggleDropdown
 
   filterTable();
   toggleDropdown(prefix);
@@ -532,12 +532,13 @@ function filterTable() {
     } else if (val === 'Trên 10 triệu VND') {
       minBudget = 10000000;
       maxBudget = Infinity;
-    } else if (val.match(/(\d+)-(\d+) triệu VND/)) {
-      const [, minTr, maxTr] = val.match(/(\d+)-(\d+) triệu VND/);
+    } else if (val.match(/^(\d+)-(\d+) triệu VND$/)) {
+      const [, minTr, maxTr] = val.match(/^(\d+)-(\d+) triệu VND$/);
       minBudget = parseInt(minTr) * 1000000;
       maxBudget = parseInt(maxTr) * 1000000;
     } else {
-      maxBudget = Infinity; // Fallback
+      minBudget = 0;
+      maxBudget = Infinity;
     }
   }
   const rows = document.querySelectorAll('#tbody > div');
@@ -546,14 +547,26 @@ function filterTable() {
     const rowFrom = row.getAttribute('data-from');
     const rowTo = row.getAttribute('data-to');
     const rowPrice = parseInt(row.getAttribute('data-price') || 0);
-    if (rowFrom === fromCode && rowTo === toCode && rowPrice >= minBudget && rowPrice <= maxBudget) {
+
+    // Chỉ hiển thị chuyến bay đúng route và đúng giá
+    if (
+      rowFrom === fromCode &&
+      rowTo === toCode &&
+      rowPrice >= minBudget &&
+      rowPrice <= maxBudget
+    ) {
       row.classList.remove('hidden');
     } else {
       row.classList.add('hidden');
     }
   });
 
-  // Thêm dòng này để phân trang lại sau khi lọc
+  // Cập nhật lại dataset.originalHidden cho phân trang
+  rows.forEach(row => {
+    row.dataset.originalHidden = row.classList.contains('hidden') ? '1' : '0';
+  });
+
+  // Phân trang lại sau khi lọc
   if (window.refreshLoadMore) window.refreshLoadMore();
 }
 
@@ -585,6 +598,23 @@ function toggleDropdown(prefix) {
       }
       const listItems = document.querySelectorAll(`#${prefix}List > div[data-city]`);
       listItems.forEach(item => item.classList.remove('hidden'));
+
+      // Ẩn option đã chọn ở bên kia
+      if (prefix === 'from') {
+        const toCode = document.getElementById('toCode')?.textContent.trim();
+        listItems.forEach(item => {
+          if (item.getAttribute('data-code') === toCode) {
+            item.classList.add('hidden');
+          }
+        });
+      } else if (prefix === 'to') {
+        const fromCode = document.getElementById('fromCode')?.textContent.trim();
+        listItems.forEach(item => {
+          if (item.getAttribute('data-code') === fromCode) {
+            item.classList.add('hidden');
+          }
+        });
+      }
 
       const currentCodeEl = document.getElementById(prefix + 'Code');
       if (currentCodeEl) {
@@ -1027,7 +1057,7 @@ document.addEventListener('click', function(e) {
       loadMore();
     });
 
-    // Expose để gọi lại khi dữ liệu thay đổi (nếu bạn filter hoặc load thêm DOM)
+    filterTable(); // Ensure filtering is applied on load
     window.refreshLoadMore = initPagination;
   })();
 
@@ -1125,4 +1155,7 @@ function sortTable(type) {
 
   tbody.innerHTML = '';
   sortedRows.forEach(row => tbody.appendChild(row));
+
+  // Gọi lại filter để chỉ hiện chuyến đúng route
+  filterTable();
 }
