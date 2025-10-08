@@ -53,27 +53,30 @@ function renderBothCalendars() {
 
 function renderCalendar(calendarNum, month, year) {
   const monthYear = document.getElementById('monthYear' + calendarNum);
-  const months = ['Tháng Một', 'Tháng Hai', 'Tháng Ba', 'Tháng Tư', 'Tháng Năm', 'Tháng Sáu', 'Tháng Bảy', 'Tháng Tám', 'Tháng Chín', 'Tháng Mười', 'Tháng Mười Một', 'Tháng Mười Hai'];
+  const months = [
+    'Tháng Một','Tháng Hai','Tháng Ba','Tháng Tư','Tháng Năm','Tháng Sáu',
+    'Tháng Bảy','Tháng Tám','Tháng Chín','Tháng Mười','Tháng Mười Một','Tháng Mười Hai'
+  ];
   if (!monthYear) return;
-  monthYear.textContent = months[month] + ' ' + year;
+  monthYear.textContent = `${months[month]} ${year}`;
 
   const body = document.getElementById('calendarBody' + calendarNum);
   if (!body) return;
   body.innerHTML = '';
 
   const firstDay = new Date(year, month, 1).getDay();
-  const adjustedFirstDay = firstDay === 0 ? 6 : firstDay - 1; // Monday = 0
+  const adjustedFirstDay = firstDay === 0 ? 6 : firstDay - 1;
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   let row = document.createElement('tr');
 
-  // Empty cells before first day
+  // ---- Ô trống đầu tháng ----
   for (let i = 0; i < adjustedFirstDay; i++) {
-    let cell = document.createElement('td');
-    cell.classList.add('h-12', 'py-1');
-    row.appendChild(cell);
+    const td = document.createElement('td');
+    td.classList.add('h-12');
+    row.appendChild(td);
   }
 
   for (let day = 1; day <= daysInMonth; day++) {
@@ -82,79 +85,108 @@ function renderCalendar(calendarNum, month, year) {
       row = document.createElement('tr');
     }
 
-    let cell = document.createElement('td');
-    cell.classList.add('h-12', 'py-1', 'relative', 'text-center');
+    const td = document.createElement('td');
+    td.classList.add('relative', 'text-center', 'p-0');
 
     const dayDateObj = new Date(year, month, day);
     dayDateObj.setHours(0, 0, 0, 0);
-    const selectedDateStr = `${day.toString().padStart(2, '0')}/${(month + 1).toString().padStart(2, '0')}/${year}`;
+    const selectedDateStr = `${String(day).padStart(2, '0')}/${String(month + 1).padStart(2, '0')}/${year}`;
 
     const dayDiv = document.createElement('div');
-    dayDiv.classList.add('relative', 'flex', 'items-center', 'justify-center', 'cursor-pointer', 'transition-colors', 'h-10', 'w-10', 'mx-auto', 'rounded-lg');
+    dayDiv.classList.add(
+      'relative','flex','items-center','justify-center',
+      'h-12','w-full','cursor-pointer','transition-colors','duration-150'
+    );
 
-    // Range background
-    let isInRange = false;
+    // --- Logic xác định trạng thái ---
+    let isInRange = false, isDeparture = false, isReturn = false;
     if (departureDate && returnDate) {
-      const depDateObj = new Date(departureDate.split('/').reverse().join('-'));
-      const retDateObj = new Date(returnDate.split('/').reverse().join('-'));
-      if (dayDateObj > depDateObj && dayDateObj < retDateObj) {
-        isInRange = true;
-      }
+      const dep = new Date(departureDate.split('/').reverse().join('-'));
+      const ret = new Date(returnDate.split('/').reverse().join('-'));
+      isDeparture = selectedDateStr === departureDate;
+      isReturn = selectedDateStr === returnDate;
+      if (dayDateObj > dep && dayDateObj < ret) isInRange = true;
+    } else {
+      isDeparture = selectedDateStr === departureDate;
     }
 
-    const isDeparture = selectedDateStr === departureDate;
-    const isReturn = selectedDateStr === returnDate;
     const isSelected = isDeparture || isReturn;
 
+    // --- Range background (xám) ---
+    if (isInRange) {
+      const rangeBg = document.createElement('div');
+      rangeBg.classList.add(
+        'absolute','inset-0','bg-[#f1e9ea]','z-0'
+      );
+      td.appendChild(rangeBg);
+    }
+
+    // --- Styling chính ---
     if (dayDateObj < today) {
-      dayDiv.classList.add('text-gray-400', 'cursor-not-allowed');
-      dayDiv.onclick = null;
+      dayDiv.classList.add('text-gray-400','cursor-not-allowed');
     } else {
       if (isSelected) {
-        dayDiv.classList.remove('hover:bg-gray-100');
-        dayDiv.classList.add('bg-[#9C0512]', 'text-white', 'font-semibold', 'shadow-sm');
-      } else if (isInRange) {
-        dayDiv.classList.add('bg-gray-100', 'hover:bg-gray-200', 'text-gray-900');
+        dayDiv.classList.add(
+          'bg-[#9C0512]',
+          'text-white',
+          'font-semibold',
+          'shadow-sm',
+          'z-10'
+        );
+
+        // Một chiều → bo tròn 4 góc
+        if (!returnDate) {
+          dayDiv.classList.add('rounded-lg');
+        } else {
+          if (isDeparture) dayDiv.classList.add('rounded-l-lg');
+          if (isReturn) dayDiv.classList.add('rounded-r-lg');
+        }
+      } else if (!isInRange) {
+        dayDiv.classList.add('hover:bg-gray-50','text-gray-900');
       } else {
-        dayDiv.classList.add('hover:bg-gray-50', 'text-gray-900');
+        dayDiv.classList.add('text-gray-900');
       }
+
       dayDiv.onclick = () => selectDate(day, month, year);
     }
 
-    // Solar date (center)
+    // --- Số ngày dương lịch ---
     const dayText = document.createElement('div');
-    dayText.classList.add('text-base', 'leading-none', 'font-normal');
+    dayText.classList.add('text-base','font-medium','z-10');
     dayText.textContent = day;
     dayDiv.appendChild(dayText);
 
-    // Lunar date (top-right)
+    // --- Lịch âm (tuỳ chọn) ---
     if (showLunar) {
-      const lunarDay = ((day + 10) % 30) + 1; // Approximation placeholder
+      const lunarDay = ((day + 10) % 30) + 1;
+      const lunarMonth = ((month + 2) % 12) + 1;
       const lunarText = document.createElement('div');
-      lunarText.classList.add('absolute', 'top-0.5', 'right-0.5', 'text-[10px]', 'leading-none', 'font-normal');
-
+      lunarText.classList.add('absolute','top-[2px]','right-[3px]','text-[10px]','z-10');
       if (lunarDay === 1) {
-        lunarText.classList.add('text-red-500', 'font-semibold');
-        const lunarMonth = ((month + 2) % 12) + 1; // Approximation placeholder
+        lunarText.classList.add('text-red-500','font-semibold');
         lunarText.textContent = `1/${lunarMonth}`;
       } else {
         lunarText.classList.add('text-gray-400');
         lunarText.textContent = lunarDay;
       }
-
+      if (isSelected) {
+        lunarText.classList.remove('text-gray-400','text-red-500');
+        lunarText.classList.add('text-white');
+      }
       dayDiv.appendChild(lunarText);
     }
 
-    cell.appendChild(dayDiv);
-    row.appendChild(cell);
+    td.appendChild(dayDiv);
+    row.appendChild(td);
   }
 
-  // Fill remaining cells
+  // ---- Ô trống cuối tháng ----
   while (row.children.length < 7) {
-    const cell = document.createElement('td');
-    cell.classList.add('h-12', 'py-1');
-    row.appendChild(cell);
+    const td = document.createElement('td');
+    td.classList.add('h-12');
+    row.appendChild(td);
   }
+
   body.appendChild(row);
 }
 
@@ -295,7 +327,6 @@ function toggleLunarCalendar() {
   showLunar = document.getElementById('amLich').checked;
   renderBothCalendars();
 }
-
 
 // ================== PASSENGERS ==================
 const MIN_ADULTS = 1;
