@@ -54,8 +54,8 @@ function renderBothCalendars() {
 function renderCalendar(calendarNum, month, year) {
   const monthYear = document.getElementById('monthYear' + calendarNum);
   const months = [
-    'Tháng Một','Tháng Hai','Tháng Ba','Tháng Tư','Tháng Năm','Tháng Sáu',
-    'Tháng Bảy','Tháng Tám','Tháng Chín','Tháng Mười','Tháng Mười Một','Tháng Mười Hai'
+    'Tháng Một', 'Tháng Hai', 'Tháng Ba', 'Tháng Tư', 'Tháng Năm', 'Tháng Sáu',
+    'Tháng Bảy', 'Tháng Tám', 'Tháng Chín', 'Tháng Mười', 'Tháng Mười Một', 'Tháng Mười Hai'
   ];
   if (!monthYear) return;
   monthYear.textContent = `${months[month]} ${year}`;
@@ -94,12 +94,14 @@ function renderCalendar(calendarNum, month, year) {
 
     const dayDiv = document.createElement('div');
     dayDiv.classList.add(
-      'relative','flex','items-center','justify-center',
-      'h-12','w-full','cursor-pointer','transition-colors','duration-150'
+      'relative', 'flex', 'items-center', 'justify-center',
+      'w-full', 'cursor-pointer', 'transition-colors', 'duration-150'
     );
 
     // --- Logic xác định trạng thái ---
-    let isInRange = false, isDeparture = false, isReturn = false;
+    let isInRange = false,
+      isDeparture = false,
+      isReturn = false;
     if (departureDate && returnDate) {
       const dep = new Date(departureDate.split('/').reverse().join('-'));
       const ret = new Date(returnDate.split('/').reverse().join('-'));
@@ -115,15 +117,16 @@ function renderCalendar(calendarNum, month, year) {
     // --- Range background (xám) ---
     if (isInRange) {
       const rangeBg = document.createElement('div');
+      // THAY ĐỔI: Thêm khoảng cách trên dưới cho nền xám
       rangeBg.classList.add(
-        'absolute','inset-0','bg-[#f1e9ea]','z-0'
+        'absolute', 'inset-x-0', 'inset-y-1', 'bg-[#f1e9ea]', 'z-0'
       );
       td.appendChild(rangeBg);
     }
 
     // --- Styling chính ---
     if (dayDateObj < today) {
-      dayDiv.classList.add('text-gray-400','cursor-not-allowed');
+      dayDiv.classList.add('text-gray-400', 'cursor-not-allowed', 'h-12'); // Thêm h-12 cho ngày cũ
     } else {
       if (isSelected) {
         dayDiv.classList.add(
@@ -131,7 +134,8 @@ function renderCalendar(calendarNum, month, year) {
           'text-white',
           'font-semibold',
           'shadow-sm',
-          'z-10'
+          'z-10',
+          'h-10' // THAY ĐỔI: Chiều cao thấp hơn cho ngày được chọn
         );
 
         // Một chiều → bo tròn 4 góc
@@ -142,9 +146,11 @@ function renderCalendar(calendarNum, month, year) {
           if (isReturn) dayDiv.classList.add('rounded-r-lg');
         }
       } else if (!isInRange) {
-        dayDiv.classList.add('hover:bg-gray-50','text-gray-900');
+        // THAY ĐỔI: Thêm lại h-12 để giữ hiệu ứng hover
+        dayDiv.classList.add('hover:bg-gray-50', 'text-gray-900', 'h-12');
       } else {
-        dayDiv.classList.add('text-gray-900');
+        // THAY ĐỔI: Thêm lại h-12 cho các ngày trong khoảng
+        dayDiv.classList.add('text-gray-900', 'h-12');
       }
 
       dayDiv.onclick = () => selectDate(day, month, year);
@@ -152,7 +158,7 @@ function renderCalendar(calendarNum, month, year) {
 
     // --- Số ngày dương lịch ---
     const dayText = document.createElement('div');
-    dayText.classList.add('text-base','font-medium','z-10');
+    dayText.classList.add('text-base', 'font-medium', 'z-10');
     dayText.textContent = day;
     dayDiv.appendChild(dayText);
 
@@ -161,16 +167,16 @@ function renderCalendar(calendarNum, month, year) {
       const lunarDay = ((day + 10) % 30) + 1;
       const lunarMonth = ((month + 2) % 12) + 1;
       const lunarText = document.createElement('div');
-      lunarText.classList.add('absolute','top-[2px]','right-[3px]','text-[10px]','z-10');
+      lunarText.classList.add('absolute', 'top-[2px]', 'right-[3px]', 'text-[10px]', 'z-10');
       if (lunarDay === 1) {
-        lunarText.classList.add('text-red-500','font-semibold');
+        lunarText.classList.add('text-red-500', 'font-semibold');
         lunarText.textContent = `1/${lunarMonth}`;
       } else {
         lunarText.classList.add('text-gray-400');
         lunarText.textContent = lunarDay;
       }
       if (isSelected) {
-        lunarText.classList.remove('text-gray-400','text-red-500');
+        lunarText.classList.remove('text-gray-400', 'text-red-500');
         lunarText.classList.add('text-white');
       }
       dayDiv.appendChild(lunarText);
