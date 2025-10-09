@@ -39,13 +39,13 @@
   </script>
 </head>
 <body class="bg-gray-100 font-sans text-sm antialiased">
-<div class="flex items-start justify-center min-h-screen mt-6">
+<div class="flex items-start justify-center min-h-screen mt-6 px-4 sm:px-0">
   <div class="w-full max-w-[1200px] bg-white border border-neutral-300 rounded-3xl p-4 flex flex-col gap-5 shadow-lg">
     <!-- Title -->
     <h1 class="text-2xl font-medium text-gray-900 leading-8">Vé máy bay đi Đà Nẵng</h1>
     
     <!-- Filters -->
-    <div class="flex gap-6">
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
       <!-- FROM -->
       <div class="flex-1 border-b border-neutral-300 pb-2 relative">
         <label class="block text-xs text-neutral-700 mb-1 font-normal">Từ</label>
@@ -59,7 +59,7 @@
         
         <!-- Dropdown -->
         <div id="fromDropdown" class="absolute z-10 w-full mt-1 bg-white border border-neutral-300 rounded-lg shadow-lg hidden">
-          <div data-side="bottom" data-align="start" data-state="open" role="dialog" id="radix-«r6b»" data-slot="popover-content" class="text-popover-foreground z-50 origin-(--radix-popover-content-transform-origin) shadow-md outline-hidden bg-white w-[400px] rounded-lg border p-0 " tabindex="-1" style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);">
+          <div data-side="bottom" data-align="start" data-state="open" role="dialog" id="radix-«r6b»" data-slot="popover-content" class="text-popover-foreground z-50 origin-(--radix-popover-content-transform-origin) shadow-md outline-hidden bg-white w-full sm:w-[400px] rounded-lg border p-0 " tabindex="-1" style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);">
             <div class="flex h-full flex-col">
               <div class="bg-white flex-shrink-0 rounded-t-lg border-b p-4">
           <div class="relative">
@@ -140,7 +140,7 @@
         
         <!-- Dropdown -->
         <div id="toDropdown" class="absolute z-10 w-full mt-1 bg-white border border-neutral-300 rounded-lg shadow-lg hidden">
-          <div data-side="bottom" data-align="start" data-state="open" role="dialog" id="radix-«r6b»" data-slot="popover-content" class="text-popover-foreground z-50 origin-(--radix-popover-content-transform-origin) shadow-md outline-hidden bg-white w-[400px] rounded-lg border p-0 " tabindex="-1" style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);">
+          <div data-side="bottom" data-align="start" data-state="open" role="dialog" id="radix-«r6b»" data-slot="popover-content" class="text-popover-foreground z-50 origin-(--radix-popover-content-transform-origin) shadow-md outline-hidden bg-white w-full sm:w-[400px] rounded-lg border p-0 " tabindex="-1" style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);">
             <div class="flex h-full flex-col">
               <div class="bg-white flex-shrink-0 rounded-t-lg border-b p-4">
           <div class="relative">
@@ -235,7 +235,7 @@
           </div>
           
           <!-- Dropdown -->
-          <div id="budgetDropdown" class="absolute z-10 w-full mt-1 bg-white border border-neutral-300 rounded-lg shadow-lg hidden">
+          <div id="budgetDropdown" class="absolute z-10 w-full mt-1 bg-white border border-neutral-300 rounded-lg shadow-lg hidden max-h-60 overflow-y-auto">
             <div class="py-1 space-y-1">
               <label class="budget-option flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 rounded gap-2">
                 <input type="radio" name="budget" value="Tất cả giá" class="hidden peer" onchange="selectOption('budget', this.value)" />
@@ -320,404 +320,344 @@
     </div>
 
     <!-- Table -->
-    <div class="border border-neutral-300 rounded-[10px]">
+    <div class="border border-neutral-300 rounded-[10px] overflow-x-auto">
       <!-- Header -->
-      <div class="flex items-center h-12 bg-ceramic-yellow-300">
-        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer">
-          <span class="font-bold text-sm">Điểm đi</span>
-        </div>
-        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer">
-          <span class="font-bold text-sm">Điểm đến</span>
-        </div>
-        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer">
-          <span class="font-bold text-sm">Ngày đi</span>
-        </div>
-        <div class="flex-1 flex items-center justify-center px-2 gap-2 cursor-pointer" onclick="sortTable('type')">
-          <span class="font-bold text-sm">Loại vé</span>
-          <img src="https://booking-1f5.pages.dev/sort.png" class="w-[9px] h-[6px]" />
-        </div>
-        <div class="w-[220px] flex items-center justify-center px-2 gap-2 cursor-pointer">
-          <span class="font-bold text-sm">Giá</span>
-        </div>
-      </div>
-     <!-- Body -->
-    <div id="tbody">
-      <!-- 1 -->
-      <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">1.178.000*</span></div>
+     <div class="min-w-[600px] grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] h-12 items-center bg-ceramic-yellow-300">
+    <div class="px-2 text-xs sm:text-sm font-bold text-center">Điểm đi</div>
+    <div class="px-2 text-xs sm:text-sm font-bold text-center">Điểm đến</div>
+    <div class="px-2 text-xs sm:text-sm font-bold text-center">Ngày đi</div>
+    <div class="px-2 text-xs sm:text-sm font-bold text-center cursor-pointer" onclick="sortTable('type')">
+      Loại vé <img src="https://booking-1f5.pages.dev/sort.png" class="inline-block ml-1 w-[9px] h-[6px]" />
+    </div>
+    <div class="px-2 text-xs sm:text-sm font-bold text-center">Giá</div>
+  </div>
+
+  <!-- BODY -->
+    <div id="tbody" class="min-w-[600px]">
+      <!-- ROW 1 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] w-full h-auto sm:min-h-16 items-start bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Đà Nẵng (DAD)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">07/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Một chiều</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm">
+              <span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.178.000*</span>
+            </div>
             <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
           </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </button>
         </div>
       </div>
 
-      <!-- 2 -->
-      <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="SGN" data-title="Hà Nội (HAN) → TP. Hồ Chí Minh (SGN)" data-price="2350000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">TP. Hồ Chí Minh (SGN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">08/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">2.350.000*</span></div>
+      <!-- ROW 2 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] items-start w-full h-auto sm:min-h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="SGN" data-title="Hà Nội (HAN) → TP. Hồ Chí Minh (SGN)" data-price="2350000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">TP. Hồ Chí Minh (SGN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">08/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Khứ hồi</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">2.350.000*</span></div>
             <div class="text-xs text-neutral-700 font-normal">Đã xem: 1h trước</div>
           </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
 
-      <!-- 3 -->
-      <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="PQC" data-title="Hà Nội (HAN) → Phú Quốc (PQC)" data-price="1200000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Phú Quốc (PQC)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">09/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">1.200.000*</span></div>
+      <!-- ROW 3 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] w-full h-auto sm:min-h-16 items-start bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="PQC" data-title="Hà Nội (HAN) → Phú Quốc (PQC)" data-price="1200000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Phú Quốc (PQC)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">09/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Một chiều</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.200.000*</span></div>
             <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
           </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
 
-      <!-- 4 -->
-      <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1450000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">1.450.000*</span></div>
+      <!-- ROW 4 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] items-start w-full h-auto sm:min-h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1450000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Đà Nẵng (DAD)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">10/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Khứ hồi</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.450.000*</span></div>
             <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
           </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
 
-      <!-- 5 -->
-      <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="SGN" data-title="Hà Nội (HAN) → TP. Hồ Chí Minh (SGN)" data-price="3100000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">TP. Hồ Chí Minh (SGN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">11/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">3.100.000*</span></div>
+      <!-- ROW 5 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] items-start w-full h-auto sm:min-h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="SGN" data-title="Hà Nội (HAN) → TP. Hồ Chí Minh (SGN)" data-price="3100000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">TP. Hồ Chí Minh (SGN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">11/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Khứ hồi</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">3.100.000*</span></div>
             <div class="text-xs text-neutral-700 font-normal">Đã xem: 1h trước</div>
           </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
 
-      <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">1.178.000*</span></div>
+      <!-- ROW 6 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] w-full h-auto sm:min-h-16 items-start bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="PQC" data-title="Hà Nội (HAN) → Phú Quốc (PQC)" data-price="2200000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Phú Quốc (PQC)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">12/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Một chiều</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">2.200.000*</span></div>
             <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
           </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
-      <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-              data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1450000">
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
-              <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-                <div>
-                  <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                      class="font-bold">1.450.000*</span></div>
-                  <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
-                </div>
-                <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24">
-                    <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-              </div>
-            </div>
 
-            <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">1.178.000*</span></div>
-            <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+      <!-- ROW 7 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] items-start w-full h-auto sm:min-h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1300000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Đà Nẵng (DAD)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">13/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Khứ hồi</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.300.000*</span></div>
+            <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
           </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       </div>
-      <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-              data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1450000">
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
-              <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-                <div>
-                  <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                      class="font-bold">1.450.000*</span></div>
-                  <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
-                </div>
-                <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24">
-                    <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">1.178.000*</span></div>
-            <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
-          </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-              data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1450000">
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
-              <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-                <div>
-                  <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                      class="font-bold">1.450.000*</span></div>
-                  <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
-                </div>
-                <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24">
-                    <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">1.178.000*</span></div>
-            <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
-          </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-              data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1450000">
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
-              <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-                <div>
-                  <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                      class="font-bold">1.450.000*</span></div>
-                  <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
-                </div>
-                <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24">
-                    <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">1.178.000*</span></div>
-            <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
-          </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-              data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1450000">
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
-              <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-                <div>
-                  <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                      class="font-bold">1.450.000*</span></div>
-                  <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
-                </div>
-                <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24">
-                    <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="flex w-full h-16 bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1178000">
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">07/11/2025</div>
-        <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Một chiều</div>
-        <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-          <div>
-            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                class="font-bold">1.178.000*</span></div>
-            <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
-          </div>
-          <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-            <svg class="w-4 h-4" viewBox="0 0 24 24">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div class="flex w-full h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
-              data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1450000">
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Hà Nội (HAN)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Đà Nẵng (DAD)</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">10/11/2025</div>
-              <div class="flex-1 flex justify-center items-center px-2 font-medium text-sm">Khứ hồi</div>
-              <div class="w-[220px] flex justify-center items-center gap-3 px-2">
-                <div>
-                  <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span
-                      class="font-bold">1.450.000*</span></div>
-                  <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
-                </div>
-                <button class="w-7 h-7 rounded-full border border-neutral-400 bg-white flex items-center justify-center">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24">
-                    <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
-                      stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-  <!-- ... tiếp tục thêm cho đến 15 (đổi màu nền xen kẽ + khác tuyến, giá, ngày) -->
-</div>
 
+      <!-- ROW 8 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] w-full h-auto sm:min-h-16 items-start bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="SGN" data-title="Hà Nội (HAN) → TP. Hồ Chí Minh (SGN)" data-price="2800000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">TP. Hồ Chí Minh (SGN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">14/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Một chiều</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">2.800.000*</span></div>
+            <div class="text-xs text-neutral-700 font-normal">Đã xem: 1h trước</div>
+          </div>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ROW 9 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] items-start w-full h-auto sm:min-h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="PQC" data-title="Hà Nội (HAN) → Phú Quốc (PQC)" data-price="950000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Phú Quốc (PQC)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">15/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Khứ hồi</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">950.000*</span></div>
+            <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+          </div>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ROW 10 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] w-full h-auto sm:min-h-16 items-start bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1600000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Đà Nẵng (DAD)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">16/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Một chiều</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.600.000*</span></div>
+            <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
+          </div>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ROW 11 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] items-start w-full h-auto sm:min-h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="SGN" data-title="Hà Nội (HAN) → TP. Hồ Chí Minh (SGN)" data-price="1900000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">TP. Hồ Chí Minh (SGN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">17/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Khứ hồi</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.900.000*</span></div>
+            <div class="text-xs text-neutral-700 font-normal">Đã xem: 1h trước</div>
+          </div>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ROW 12 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] w-full h-auto sm:min-h-16 items-start bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="PQC" data-title="Hà Nội (HAN) → Phú Quốc (PQC)" data-price="2500000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Phú Quốc (PQC)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">18/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Một chiều</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">2.500.000*</span></div>
+            <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+          </div>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ROW 13 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] items-start w-full h-auto sm:min-h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="DAD" data-title="Hà Nội (HAN) → Đà Nẵng (DAD)" data-price="1100000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Đà Nẵng (DAD)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">19/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Khứ hồi</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.100.000*</span></div>
+            <div class="text-xs text-neutral-700 font-normal">Đã xem: 2h trước</div>
+          </div>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ROW 14 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] w-full h-auto sm:min-h-16 items-start bg-white cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="SGN" data-title="Hà Nội (HAN) → TP. Hồ Chí Minh (SGN)" data-price="2600000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">TP. Hồ Chí Minh (SGN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">20/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Một chiều</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">2.600.000*</span></div>
+            <div class="text-xs text-neutral-700 font-normal">Đã xem: 1h trước</div>
+          </div>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ROW 15 -->
+      <div
+        class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_220px] items-start w-full h-auto sm:min-h-16 bg-neutral-100 cursor-pointer open-modal hover:bg-neutral-300 transition-colors"
+        data-from="HAN" data-to="PQC" data-title="Hà Nội (HAN) → Phú Quốc (PQC)" data-price="1800000"
+      >
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Hà Nội (HAN)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Phú Quốc (PQC)</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">21/11/2025</div>
+        <div class="px-2 py-2 font-medium text-sm text-center min-w-0 whitespace-normal break-words">Khứ hồi</div>
+        <div class="px-2 py-2 flex items-center justify-between gap-2 min-w-0">
+          <div class="min-w-0 whitespace-normal break-words">
+            <div class="flex items-baseline gap-1 text-sm"><span class="font-normal">từ</span><span class="font-bold">VND</span><span class="font-bold">1.800.000*</span></div>
+            <div class="text-xs text-neutral-700 font-normal">Đã xem: 3h trước</div>
+          </div>
+          <button class="shrink-0 w-7 h-7 rounded-full border border-neutral-400 bg-white grid place-items-center" aria-label="Xem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
     </div>
 
     <!-- Nút Xem thêm -->
-    <button id="loadMoreBtn" type="button" class="w-[200px] h-12 mx-auto px-3 bg-neutral-100 rounded-lg cursor-pointer hover:bg-neutral-300 transition-colors font-medium text-sm hidden">Xem thêm</button>
+    <button id="loadMoreBtn" type="button" class="w-full sm:w-[200px] h-12 mx-auto px-3 bg-neutral-100 rounded-lg cursor-pointer hover:bg-neutral-300 transition-colors font-medium text-sm hidden">Xem thêm</button>
     <p class="text-xs text-neutral-700 text-center font-normal">*Giá vé được thu thập trong vòng 24 giờ và có thể không còn hiệu lực tại thời điểm đặt chỗ.</p>
   </div>
 </div>
 
 <!-- MODAL -->
-<div class="fixed inset-0 hidden pt-6 justify-center bg-black/60 backdrop-blur-sm z-[9999]" id="bookingModal">
-  <div class="w-[1200px] h-[380px] max-w-[95vw] bg-white border border-neutral-300 rounded-2xl shadow-2xl flex flex-col py-[24px] px-[36px]">
-    <div class="h-[308px] px-[24px] pb-[24px]">
-      <!-- Card Header -->
-      <div class="grid grid-cols-3 h-[56px] items-center gap-[16px] border-b border-neutral-300">
+<div class="fixed inset-0 hidden pt-6 justify-center bg-black/60 backdrop-blur-sm z-[9999] px-4 sm:px-0" id="bookingModal">
+  <div class="w-full max-w-[1200px] sm:max-h-[380px] max-h-auto bg-white border border-neutral-300 rounded-2xl shadow-2xl flex flex-col py-[24px] px-[16px] sm:px-[36px]">
+    <div class="h-auto sm:h-[308px] px-[16px] sm:px-[24px] pb-[24px]">
+      <div class="grid grid-cols-1 sm:grid-cols-3 h-[56px] items-center gap-[16px] border-b border-neutral-300">
         <div></div>
         <div class="text-center font-semibold text-gray-900 text-base" id="modalTitle">Đặt chuyến bay</div>
         <div class="text-right text-neutral-700 text-sm font-normal" id="modalPrice"></div>
       </div>
 
-      <div class="bg-[#FCFCFC] h-[252px]">
-        <!-- Radio Buttons -->
-        <div class="flex gap-[24px] p-[8px]">
+      <div class="bg-[#FCFCFC] h-auto sm:h-[252px]">
+        <div class="flex flex-wrap gap-[12px] sm:gap-[24px] p-[8px] justify-center sm:justify-start">
           <label class="inline-flex items-center gap-2 cursor-pointer">
             <input type="radio" name="trip" value="Khứ hồi" class="hidden peer" />
             <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
@@ -728,25 +668,22 @@
           <label class="inline-flex items-center gap-2 cursor-pointer">
             <input type="radio" name="trip" value="Một chiều" class="hidden peer" />
             <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
-          <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
             </span>
             <span class="font-semibold text-gray-900 text-sm">Một chiều</span>
           </label>
           <label class="inline-flex items-center gap-2 cursor-not-allowed">
             <input type="radio" name="trip" value="Nhiều chặng" class="hidden peer" disabled/>
             <span class="w-5 h-5 rounded-full border border-neutral-400 bg-white grid place-items-center peer-checked:bg-[#B6993A] peer-checked:border-[#B6993A] transition-all">
-          <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-white peer-checked:bg-[#B6993A] transition-all"></span>
             </span>
             <span class="font-semibold text-gray-400 text-sm">Nhiều chặng</span>
           </label>
         </div>
 
-        <!-- Content -->
-        <div class="flex gap-[16px] w-[1080px] h-[208px] py-[24px]">
-          <!-- FROM-TO Block -->
-            <div class="w-[344px] flex">
-              <!-- FROM (modal) -->
-              <div class="relative flex-1 flex flex-col justify-center items-center">
+        <div class="flex flex-col sm:flex-row gap-[16px] w-full max-w-[1080px] h-auto sm:h-[208px] py-[24px]">
+          <div class="w-full sm:w-[344px] flex flex-col sm:flex-row items-center">
+              <div class="relative flex-1 flex flex-col justify-center items-center w-full">
                 <button
                   type="button"
                   id="modalFromBtn"
@@ -758,14 +695,13 @@
                   <div class="text-sm text-gray-900 text-center font-normal">Việt Nam</div>
                 </button>
 
-                <!-- DROPDOWN FROM (giống outer) -->
                 <div id="modalFromDropdown"
-                    class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[400px] max-h-[500px] overflow-auto bg-white border border-neutral-300 rounded-lg shadow-xl z-[10000]">
+                     class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 w-full sm:w-[400px] max-h-[500px] overflow-auto bg-white border border-neutral-300 rounded-lg shadow-xl z-[10000]">
                   <div class="flex h-full flex-col">
                     <div class="bg-white flex-shrink-0 rounded-t-lg border-b p-4">
                       <div class="relative">
                         <input id="modalFromSearch" type="text" placeholder="Tìm tỉnh, thành phố, sân bay"
-                              class="bg-white focus:bg-secondary w-full rounded-lg border border-gray-300 py-3 pr-10 pl-10 focus:outline-none">
+                               class="bg-white focus:bg-secondary w-full rounded-lg border border-gray-300 py-3 pr-10 pl-10 focus:outline-none">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform text-gray-400" aria-hidden="true">
                           <path d="m21 21-4.34-4.34"></path>
                           <circle cx="11" cy="11" r="8"></circle>
@@ -844,13 +780,16 @@
                 </div>
               </div>
 
-              <!-- SWAP -->
-              <div class="grid place-items-center px-3 cursor-pointer" onclick="swapAirports()">
-                <svg class="w-6 h-6" viewBox="0 0 24 24"><path d="M3 7h13m0 0l-3-3m3 3l-3 3M21 17H8m0 0l3-3m-3 3l3 3" stroke="#374151" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="grid place-items-center py-2 sm:px-3 cursor-pointer my-2 sm:my-0"
+                  onclick="swapAirports()">
+                <svg class="w-6 h-6 rotate-90 sm:rotate-0" viewBox="0 0 24 24">
+                  <path d="M3 7h13m0 0l-3-3m3 3l-3 3M21 17H8m0 0l3-3m-3 3l3 3"
+                    stroke="#374151" stroke-width="2" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </div>
 
-              <!-- TO (modal) -->
-              <div class="relative flex-1 flex flex-col justify-center items-center">
+              <div class="relative flex-1 flex flex-col justify-center items-center w-full">
                 <button
                   type="button"
                   id="modalToBtn"
@@ -862,14 +801,13 @@
                   <div class="text-sm text-gray-900 text-center font-normal">Việt Nam</div>
                 </button>
 
-                <!-- DROPDOWN TO (giống outer) -->
                 <div id="modalToDropdown"
-                    class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[400px] max-h-[500px] overflow-auto bg-white border border-neutral-300 rounded-lg shadow-xl z-[10000]">
+                     class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 w-full sm:w-[400px] max-h-[500px] overflow-auto bg-white border border-neutral-300 rounded-lg shadow-xl z-[10000]">
                   <div class="flex h-full flex-col">
                     <div class="bg-white flex-shrink-0 rounded-t-lg border-b p-4">
                       <div class="relative">
                         <input id="modalToSearch" type="text" placeholder="Tìm tỉnh, thành phố, sân bay"
-                              class="bg-white focus:bg-secondary w-full rounded-lg border border-gray-300 py-3 pr-10 pl-10 focus:outline-none">
+                               class="bg-white focus:bg-secondary w-full rounded-lg border border-gray-300 py-3 pr-10 pl-10 focus:outline-none">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform text-gray-400" aria-hidden="true">
                           <path d="m21 21-4.34-4.34"></path>
                           <circle cx="11" cy="11" r="8"></circle>
@@ -949,8 +887,7 @@
               </div>
             </div>
 
-          <!-- Fields -->
-          <div class="flex-1 grid grid-cols-2 gap-x-[20px] gap-y-[16px]">
+          <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-[20px] gap-y-[16px] order-first sm:order-none">
             <div class="relative flex items-end border-b border-neutral-400 p-[8px]">
               <div class="flex-1 h-[54px] flex flex-col justify-between">
                 <div class="text-sm text-neutral-700 font-medium gap-[8px]">
@@ -958,15 +895,13 @@
                 </div>
                 <input class="w-full text-base font-semibold text-neutral-400 border-0 bg-transparent outline-none placeholder:text-neutral-400 mt-0 mb-0 cursor-pointer" type="text" id="modalDate" placeholder="Chọn ngày" onclick="showDatePicker()" />
               </div>
-                <div class="self-start">                
+                <div class="self-start">                    
                   <img src="https://booking-1f5.pages.dev/date.svg" class="w-5 h-5 cursor-pointer" onclick="showDatePicker()" />
                 </div>
-             <!-- Custom Datepicker -->
               <div id="datepicker"
-                  class="absolute z-[999999] left-0 top-full bg-white border border-neutral-300 rounded-xl shadow-2xl hidden w-[750px]"
-                >
-                <div class="flex">
-                  <!-- Month 1 -->
+                   class="absolute z-[999999] left-0 top-full bg-white border border-neutral-300 rounded-xl shadow-2xl hidden w-full sm:w-[750px]"
+                 >
+                <div class="flex flex-col sm:flex-row">
                   <div class="flex-1 px-5 py-4">
                     <div class="flex justify-between items-center mb-4">
                       <button onclick="prevMonth()" class="text-gray-900 hover:text-gray-600 transition-colors">
@@ -991,8 +926,7 @@
                     </table>
                   </div>
                   
-                  <!-- Month 2 -->
-                  <div class="flex-1 px-5 py-4 border-l border-neutral-200">
+                  <div class="flex-1 px-5 py-4 border-t sm:border-l border-neutral-200 sm:border-t-0">
                     <div class="flex justify-between items-center mb-4">
                       <div class="w-5"></div>
                       <span id="monthYear2" class="font-semibold text-base text-gray-900">Tháng Mười Một 2025</span>
@@ -1017,7 +951,6 @@
                   </div>
                 </div>
                 
-                <!-- Footer -->
                 <div class="flex items-center justify-between border-t border-neutral-200 px-5 py-3">
                   <div class="flex items-center gap-2">
                     <label class="relative inline-flex items-center cursor-pointer">
@@ -1027,8 +960,8 @@
                     <span class="text-sm text-gray-900 font-normal">Âm lịch</span>
                   </div>
                   <div class="flex gap-2">
-                    <button onclick="resetDatePicker()" class="px-5 py-2 border border-gray-300 rounded-lg text-sm font-normal text-gray-900 hover:bg-gray-50 transition-colors">Chọn lại</button>
-                    <button onclick="closeDatePicker()" class="px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-normal hover:bg-gray-800 transition-colors">Chọn</button>
+                    <button onclick="resetDatePicker()" class="px-5 py-2 border border-gray-300 text-sm font-normal text-gray-900 hover:bg-gray-50 transition-colors">Chọn lại</button>
+                    <button onclick="closeDatePicker()" class="px-5 py-2 bg-gray-900 text-white text-sm font-normal hover:bg-gray-800 transition-colors">Chọn</button>
                   </div>
                 </div>
               </div>
@@ -1044,8 +977,7 @@
               <div class="self-start">
                 <img src="https://booking-1f5.pages.dev/Vector.png" class="w-4 h-4 cursor-pointer" onclick="togglePassengerDropdown()" />
               </div>
-              <!-- Passenger Dropdown -->
-              <div id="passengerDropdown" class="absolute z-20 left-0 top-full bg-white border border-neutral-300 rounded-lg shadow-lg hidden w-72 lg:w-[612px] min-h-[270px]">
+              <div id="passengerDropdown" class="absolute z-20 left-0 top-full bg-white border border-neutral-300 rounded-lg shadow-lg hidden w-full sm:w-72 lg:w-[612px] min-h-[270px]">
                 <div class="flex h-full flex-col">
                   <div class="flex-1 p-4">
                     <div class="flex flex-col gap-4 sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 md:gap-6">
@@ -1140,19 +1072,19 @@
               </div>
             </div>
 
-            <div class="col-span-2 flex items-end gap-3 border-b border-neutral-400 p-[8px]">
+            <div class="col-span-1 sm:col-span-2 flex items-end gap-3 border-b border-neutral-400 p-[8px]">
               <div class="flex-1 h-[54px] flex flex-col justify-between">
                 <div class="text-sm text-gray-700 font-medium mb-1">Mã giảm giá</div>
                 <input class="w-full text-base font-semibold text-gray-900 border-0 bg-transparent outline-none placeholder:text-neutral-400" placeholder="Mã giảm giá" />
               </div>
             </div>
           </div>
-          <div class="h-[160px] w-[144px] pt-[20px]">
-            <button class="h-[52px] w-full px-[24px] py-[8px] bg-[#9C0512] text-white inline-flex items-center gap-2 cursor-pointer hover:bg-[#64090c] transition-colors font-semibold text-sm">
+          <div class="h-[160px] w-full sm:w-[144px] pt-[20px] flex justify-center items-center">
+            <button class="h-[52px] w-full sm:w-auto px-[24px] py-[8px] bg-[#9C0512] text-white inline-flex items-center gap-2 cursor-pointer hover:bg-[#64090c] transition-colors font-semibold text-sm justify-center">
               Tìm kiếm
               <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-          </div>         
+          </div>      
         </div>
       </div>
     </div>
