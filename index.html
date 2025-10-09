@@ -648,15 +648,15 @@
 
 <!-- MODAL -->
 <div class="fixed inset-0 hidden pt-6 justify-center bg-black/60 backdrop-blur-sm z-[9999] px-4 sm:px-0" id="bookingModal">
-  <div class="w-full max-w-[1200px] sm:max-h-[380px] max-h-auto bg-white border border-neutral-300 rounded-2xl shadow-2xl flex flex-col py-[24px] px-[16px] sm:px-[36px]">
-    <div class="h-auto sm:h-[308px] px-[16px] sm:px-[24px] pb-[24px]">
+  <div class="w-full max-w-[1200px] min-[860px]:max-h-[380px] max-h-auto bg-white border border-neutral-300 rounded-2xl shadow-2xl flex flex-col py-[24px] px-[16px] sm:px-[36px]">
+    <div class="h-auto px-[16px] sm:px-[24px] pb-[24px]">
       <div class="grid grid-cols-1 sm:grid-cols-3 h-[56px] items-center gap-[16px] border-b border-neutral-300">
         <div></div>
         <div class="text-center font-semibold text-gray-900 text-base" id="modalTitle">Đặt chuyến bay</div>
         <div class="text-right text-neutral-700 text-sm font-normal" id="modalPrice"></div>
       </div>
 
-      <div class="bg-[#FCFCFC] h-auto sm:h-[252px]">
+      <div class="bg-[#FCFCFC] h-auto">
         <div class="flex flex-wrap gap-[12px] sm:gap-[24px] p-[8px] justify-center sm:justify-start">
           <label class="inline-flex items-center gap-2 cursor-pointer">
             <input type="radio" name="trip" value="Khứ hồi" class="hidden peer" />
@@ -681,8 +681,8 @@
           </label>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-[16px] w-full max-w-[1080px] h-auto sm:h-[208px] py-[24px]">
-          <div class="w-full sm:w-[344px] flex flex-col sm:flex-row items-center">
+        <div class="flex flex-col min-[860px]:flex-row flex-wrap items-center gap-[16px] w-full max-w-[1080px] h-auto py-[24px]">
+          <div class="w-full sm:w-auto flex flex-row items-center">
               <div class="relative flex-1 flex flex-col justify-center items-center w-full">
                 <button
                   type="button"
@@ -887,7 +887,7 @@
               </div>
             </div>
 
-          <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-[20px] gap-y-[16px] order-first sm:order-none">
+          <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-[20px] gap-y-[16px]">
             <div class="relative flex items-end border-b border-neutral-400 p-[8px]">
               <div class="flex-1 h-[54px] flex flex-col justify-between">
                 <div class="text-sm text-neutral-700 font-medium gap-[8px]">
@@ -1079,7 +1079,7 @@
               </div>
             </div>
           </div>
-          <div class="h-[160px] w-full sm:w-[144px] pt-[20px] flex justify-center">
+           <div class="h-[160px] w-full sm:w-[144px] pt-[20px] flex justify-center">
             <button class="h-[52px] w-full sm:w-auto px-[24px] py-[8px] bg-[#9C0512] text-white inline-flex items-center gap-2 cursor-pointer hover:bg-[#64090c] transition-colors font-semibold text-sm justify-center">
               Tìm kiếm
               <svg class="w-4 h-4" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
