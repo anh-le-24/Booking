@@ -302,10 +302,18 @@ function updateDateInput() {
   }
 }
 
+// CẬP NHẬT: Hàm hiển thị datepicker để làm việc với wrapper và class 'is-open'
 function showDatePicker() {
-  const picker = document.getElementById('datepicker');
-  if (!picker) return;
-  picker.classList.remove('hidden');
+  const wrapper = document.getElementById('datepicker-wrapper');
+  if (!wrapper) return;
+
+  wrapper.classList.add('is-open');
+  // Chặn cuộn trang nền khi drawer đang mở trên mobile
+  if (window.innerWidth < 640) { // 640px là breakpoint 'sm' mặc định của Tailwind
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Logic cũ giữ lại
   showLunar = true;
   const amLichCheckbox = document.getElementById('amLich');
   if (amLichCheckbox) amLichCheckbox.checked = true;
@@ -313,14 +321,21 @@ function showDatePicker() {
   renderBothCalendars();
 }
 
+// CẬP NHẬT: Hàm ẩn datepicker
 function hideDatePicker() {
-  const picker = document.getElementById('datepicker');
-  if (picker) picker.classList.add('hidden');
+  const wrapper = document.getElementById('datepicker-wrapper');
+  if (wrapper) {
+    wrapper.classList.remove('is-open');
+    // Cho phép cuộn trang trở lại
+    document.body.style.overflow = '';
+  }
 }
 
+// CẬP NHẬT: Hàm đóng datepicker (gọi hàm hideDatePicker)
 function closeDatePicker() {
   hideDatePicker();
 }
+
 
 function resetDatePicker() {
   departureDate = '';
@@ -499,33 +514,33 @@ function updatePassengerDisplay() {
 }
 
 // Nếu bạn có nút +/– gọi trực tiếp, có thể chặn tăng khi vượt giới hạn:
-window.incAdult = () => canIncrement('adult') && updatePassengerCount('adult', +1);
+window.incAdult = () => updatePassengerCount('adult', +1);
 window.decAdult = () => updatePassengerCount('adult', -1);
-window.incChild = () => canIncrement('child') && updatePassengerCount('child', +1);
+window.incChild = () => updatePassengerCount('child', +1);
 window.decChild = () => updatePassengerCount('child', -1);
-window.incInfant = () => canIncrement('infant') && updatePassengerCount('infant', +1);
+window.incInfant = () => updatePassengerCount('infant', +1);
 window.decInfant = () => updatePassengerCount('infant', -1);
 
 // ================== SWAP AIRPORTS (MODAL) ==================
 function swapAirports() {
-  const modalFromCode = document.getElementById('modalFromCode');
-  const modalFromCity = document.getElementById('modalFromCity');
-  const modalToCode = document.getElementById('modalToCode');
-  const modalToCity = document.getElementById('modalToCity');
+  const modalFromCodeEl = document.getElementById('modalFromCode');
+  const modalFromCityEl = document.getElementById('modalFromCity');
+  const modalToCodeEl = document.getElementById('modalToCode');
+  const modalToCityEl = document.getElementById('modalToCity');
 
-  if (!modalFromCode || !modalFromCity || !modalToCode || !modalToCity) return;
+  if (!modalFromCodeEl || !modalFromCityEl || !modalToCodeEl || !modalToCityEl) return;
 
-  const fromCode = modalFromCode.textContent.trim();
-  const fromCity = modalFromCity.textContent.trim();
-  const toCode = modalToCode.textContent.trim();
-  const toCity = modalToCity.textContent.trim();
+  const fromCode = modalFromCodeEl.textContent.trim();
+  const fromCity = modalFromCityEl.textContent.trim();
+  const toCode = modalToCodeEl.textContent.trim();
+  const toCity = modalToCityEl.textContent.trim();
 
-  modalFromCode.textContent = toCode;
-  modalFromCity.textContent = toCity;
-  modalToCode.textContent = fromCode;
-  modalToCity.textContent = fromCity;
+  modalFromCodeEl.textContent = toCode;
+  modalFromCityEl.textContent = toCity;
+  modalToCodeEl.textContent = fromCode;
+  modalToCityEl.textContent = fromCity;
 
-  [modalFromCode, modalFromCity, modalToCode, modalToCity].forEach(el => {
+  [modalFromCodeEl, modalFromCityEl, modalToCodeEl, modalToCityEl].forEach(el => {
     el.classList.remove('text-neutral-400');
     el.classList.add('text-gray-900');
   });
@@ -549,7 +564,7 @@ function selectAirport(prefix, fullCity, airportName, code) {
     currentFromCode = code;
   } else if (prefix === 'to') {
     currentToCode = code;
-  }toggleDropdown
+  }
 
   filterTable();
   toggleDropdown(prefix);
@@ -715,7 +730,6 @@ function highlightSelectedBudgetOption(selectedValue) {
 // Search filtering for outer dropdowns
 function setupSearchFilter() {
   const fromSearch = document.getElementById('fromSearch');
-  const fromListItems = document.querySelectorAll('#fromList > div[data-city]');
   if (fromSearch) {
     fromSearch.oninput = null;
     fromSearch.oninput = handleFromSearch;
@@ -723,7 +737,6 @@ function setupSearchFilter() {
   }
 
   const toSearch = document.getElementById('toSearch');
-  const toListItems = document.querySelectorAll('#toList > div[data-city]');
   if (toSearch) {
     toSearch.oninput = null;
     toSearch.oninput = handleToSearch;
@@ -732,6 +745,7 @@ function setupSearchFilter() {
 
   function handleFromSearch(e) {
     const query = e.target.value.toLowerCase();
+    const fromListItems = document.querySelectorAll('#fromList > div[data-city]');
     const currentCode = document.getElementById('fromCode') ? document.getElementById('fromCode').textContent.trim() : '';
     fromListItems.forEach(item => {
       const city = item.getAttribute('data-city').toLowerCase();
@@ -750,6 +764,7 @@ function setupSearchFilter() {
 
   function handleToSearch(e) {
     const query = e.target.value.toLowerCase();
+    const toListItems = document.querySelectorAll('#toList > div[data-city]');
     const currentCode = document.getElementById('toCode') ? document.getElementById('toCode').textContent.trim() : '';
     toListItems.forEach(item => {
       const city = item.getAttribute('data-city').toLowerCase();
@@ -774,17 +789,21 @@ function toggleModalDropdown(side) {
   const ddTo = document.getElementById('modalToDropdown');
   const btnFrom = document.getElementById('modalFromBtn');
   const btnTo = document.getElementById('modalToBtn');
+  
+  const isOpeningFrom = side === 'from' && ddFrom && ddFrom.classList.contains('hidden');
+  const isOpeningTo = side === 'to' && ddTo && ddTo.classList.contains('hidden');
+
   if (ddFrom) ddFrom.classList.add('hidden');
   if (ddTo) ddTo.classList.add('hidden');
   if (btnFrom) btnFrom.classList.remove('bg-neutral-100');
   if (btnTo) btnTo.classList.remove('bg-neutral-100');
-  const dd = side === 'from' ? ddFrom : ddTo;
-  const btn = side === 'from' ? btnFrom : btnTo;
-  if (dd) {
-    dd.classList.toggle('hidden');
-    if (!dd.classList.contains('hidden') && btn) {
-      btn.classList.add('bg-neutral-100');
-    }
+  
+  if (side === 'from' && isOpeningFrom) {
+    if (ddFrom) ddFrom.classList.remove('hidden');
+    if (btnFrom) btnFrom.classList.add('bg-neutral-100');
+  } else if (side === 'to' && isOpeningTo) {
+    if (ddTo) ddTo.classList.remove('hidden');
+    if (btnTo) btnTo.classList.add('bg-neutral-100');
   }
 }
 
@@ -857,29 +876,21 @@ function attachModalSearchModal() {
   }
 }
 
-// Close modal dropdowns on outside click
-document.addEventListener('mousedown', function (e) {
-  const ddFrom = document.getElementById('modalFromDropdown');
-  const ddTo = document.getElementById('modalToDropdown');
-  const insideFromBtn = e.target.closest('#modalFromCode, #modalFromCity');
-  const insideToBtn = e.target.closest('#modalToCode, #modalToCity');
-  const insideDropdown = e.target.closest('#modalFromDropdown, #modalToDropdown');
-  if (!insideFromBtn && !insideToBtn && !insideDropdown) {
-    if (ddFrom) ddFrom.classList.add('hidden');
-    if (ddTo) ddTo.classList.add('hidden');
-  }
-});
-
+// CẬP NHẬT: Trình xử lý click bên ngoài cho datepicker
 document.addEventListener('mousedown', function(e) {
+  const datepickerWrapper = document.getElementById('datepicker-wrapper');
   const datepicker = document.getElementById('datepicker');
-  const modalDate = document.getElementById('modalDate');
-  if (!datepicker || datepicker.classList.contains('hidden')) return;
+  const modalDateInput = document.getElementById('modalDate');
 
-  // Nếu click không nằm trong datepicker hoặc nút mở datepicker thì đóng
-  if (!datepicker.contains(e.target) && e.target !== modalDate) {
+  // Điều kiện mới: kiểm tra wrapper có class 'is-open' không
+  if (!datepickerWrapper || !datepickerWrapper.classList.contains('is-open')) return;
+
+  // Nếu click không nằm trong datepicker hoặc input mở nó thì đóng
+  if (datepicker && !datepicker.contains(e.target) && e.target !== modalDateInput) {
     hideDatePicker();
   }
 });
+
 
 // ================== OUTSIDE CLICK (outer dropdowns & passenger) ==================
 document.addEventListener('click', function(event) {
@@ -929,7 +940,7 @@ function openModal(row) {
   departureDate = dateCell;
   if (typeCell === 'Khứ hồi') {
     const [d, m, y] = dateCell.split('/').map(Number);
-    const depDate = new Date(y, m-1, d);
+    const depDate = new Date(y, m - 1, d);
     const retDate = new Date(depDate);
     retDate.setDate(depDate.getDate() + 7);
     const retD = retDate.getDate().toString().padStart(2, '0');
@@ -1031,72 +1042,72 @@ document.addEventListener('click', function(e) {
   }
 });
 
- (function () {
-    const PAGE_SIZE = 10;
-    const tbody = document.getElementById('tbody');
-    const btn = document.getElementById('loadMoreBtn');
+(function () {
+  const PAGE_SIZE = 10;
+  const tbody = document.getElementById('tbody');
+  const btn = document.getElementById('loadMoreBtn');
 
-    function getAllRowEls() {
-      return Array.from(tbody ? tbody.children : []).filter(el => el.tagName === 'DIV');
-    }
+  function getAllRowEls() {
+    return Array.from(tbody ? tbody.children : []).filter(el => el.tagName === 'DIV');
+  }
 
-    function initPagination() {
-      if (!tbody || !btn) return;
+  function initPagination() {
+    if (!tbody || !btn) return;
 
-      const rows = getAllRowEls();
+    const rows = getAllRowEls();
 
-      rows.forEach(row => {
-        if (!row.dataset.originalHidden) {
-          row.dataset.originalHidden = row.classList.contains('hidden') ? '1' : '0';
-        }
-      });
-
-      const candidates = rows.filter(r => r.dataset.originalHidden === '0');
-
-      candidates.forEach(r => {
-        if (r.dataset.managed === '1') {
-          r.classList.remove('hidden');
-        }
-        r.dataset.managed = '0';
-      });
-
-      candidates.forEach((row, idx) => {
-        row.dataset.managed = '1'; 
-        if (idx >= PAGE_SIZE) {
-          row.classList.add('hidden'); 
-        } else {
-          row.classList.remove('hidden');
-        }
-      });
-
-      const remaining = candidates.filter(r => r.dataset.managed === '1' && r.classList.contains('hidden'));
-      if (remaining.length > 0) {
-        btn.classList.remove('hidden');
-      } else {
-        btn.classList.add('hidden');
+    rows.forEach(row => {
+      if (!row.dataset.originalHidden) {
+        row.dataset.originalHidden = row.classList.contains('hidden') ? '1' : '0';
       }
-    }
-
-    function loadMore() {
-      const rows = getAllRowEls().filter(r => r.dataset.managed === '1' && r.classList.contains('hidden'));
-      const count = Math.min(PAGE_SIZE, rows.length);
-      for (let i = 0; i < count; i++) {
-        rows[i].classList.remove('hidden');
-      }
-      if (rows.length <= PAGE_SIZE) {
-        btn.classList.add('hidden');
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', initPagination);
-    btn && btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      loadMore();
     });
 
-    filterTable(); // Ensure filtering is applied on load
-    window.refreshLoadMore = initPagination;
-  })();
+    const candidates = rows.filter(r => r.dataset.originalHidden === '0');
+
+    candidates.forEach(r => {
+      if (r.dataset.managed === '1') {
+        r.classList.remove('hidden');
+      }
+      r.dataset.managed = '0';
+    });
+
+    candidates.forEach((row, idx) => {
+      row.dataset.managed = '1';
+      if (idx >= PAGE_SIZE) {
+        row.classList.add('hidden');
+      } else {
+        row.classList.remove('hidden');
+      }
+    });
+
+    const remaining = candidates.filter(r => r.dataset.managed === '1' && r.classList.contains('hidden'));
+    if (remaining.length > 0) {
+      btn.classList.remove('hidden');
+    } else {
+      btn.classList.add('hidden');
+    }
+  }
+
+  function loadMore() {
+    const rows = getAllRowEls().filter(r => r.dataset.managed === '1' && r.classList.contains('hidden'));
+    const count = Math.min(PAGE_SIZE, rows.length);
+    for (let i = 0; i < count; i++) {
+      rows[i].classList.remove('hidden');
+    }
+    if (rows.length <= PAGE_SIZE) {
+      btn.classList.add('hidden');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initPagination);
+  btn && btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    loadMore();
+  });
+
+  filterTable(); // Ensure filtering is applied on load
+  window.refreshLoadMore = initPagination;
+})();
 
 // ================== INIT ==================
 // ...existing code...

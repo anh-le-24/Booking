@@ -898,70 +898,81 @@
                 <div class="self-start">                    
                   <img src="https://booking-1f5.pages.dev/date.svg" class="w-5 h-5 cursor-pointer" onclick="showDatePicker()" />
                 </div>
-              <div id="datepicker"
-                   class="absolute z-[999999] left-0 top-full bg-white border border-neutral-300 rounded-xl shadow-2xl hidden w-full sm:w-[750px]"
-                 >
-                <div class="flex flex-col sm:flex-row">
-                  <div class="flex-1 px-5 py-4">
-                    <div class="flex justify-between items-center mb-4">
-                      <button onclick="prevMonth()" class="text-gray-900 hover:text-gray-600 transition-colors">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      </button>
-                      <span id="monthYear1" class="font-semibold text-base text-gray-900">Tháng Mười 2025</span>
-                      <div class="w-5"></div>
-                    </div>
-                    <table class="w-full">
-                      <thead>
-                        <tr class="text-gray-500 text-xs font-normal">
-                          <th class="pb-2 font-normal w-[14.28%]">Th 2</th>
-                          <th class="pb-2 font-normal w-[14.28%]">Th 3</th>
-                          <th class="pb-2 font-normal w-[14.28%]">Th 4</th>
-                          <th class="pb-2 font-normal w-[14.28%]">Th 5</th>
-                          <th class="pb-2 font-normal w-[14.28%]">Th 6</th>
-                          <th class="pb-2 font-normal w-[14.28%]">Th 7</th>
-                          <th class="pb-2 font-normal w-[14.28%]">CN</th>
-                        </tr>
-                      </thead>
-                      <tbody id="calendarBody1"></tbody>
-                    </table>
-                  </div>
+              <div id="datepicker-wrapper" class="group">
+                <div
+                  onclick="closeDatePicker()"
+                  class="fixed inset-0 bg-black/50 z-[999998] opacity-0 pointer-events-none transition-opacity duration-300 group-[.is-open]:opacity-100 group-[.is-open]:pointer-events-auto sm:hidden"
+                ></div>
+
+                <div
+                  id="datepicker"
+                  class="fixed bottom-0 left-0 z-[999999] w-full bg-white rounded-t-xl shadow-2xl transition-all duration-300 ease-in-out transform translate-y-full group-[.is-open]:translate-y-0
+                        sm:absolute sm:left-0 sm:top-full sm:w-[750px] sm:rounded-xl sm:border sm:border-neutral-300 sm:opacity-0 sm:pointer-events-none sm:translate-y-2 sm:group-[.is-open]:opacity-100 sm:group-[.is-open]:pointer-events-auto sm:group-[.is-open]:translate-y-0"
+                >
+                  <div class="sm:hidden w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-2.5 mb-1"></div>
                   
-                  <div class="flex-1 px-5 py-4 border-t border-neutral-200 sm:border-t-0">
-                    <div class="flex justify-between items-center mb-4">
-                      <div class="w-5"></div>
-                      <span id="monthYear2" class="font-semibold text-base text-gray-900">Tháng Mười Một 2025</span>
-                      <button onclick="nextMonth()" class="text-gray-900 hover:text-gray-600 transition-colors">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      </button>
+                  <div class="flex flex-col sm:flex-row bg-white sm:rounded-t-lg sm:shadow-lg sm:border sm:border-neutral-300">
+                    <div class="flex-1 px-5 py-4">
+                      <div class="flex justify-between items-center mb-4">
+                        <button onclick="prevMonth()" class="text-gray-900 hover:text-gray-600 transition-colors">
+                          <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <span id="monthYear1" class="font-semibold text-base text-gray-900">Tháng Mười 2025</span>
+                        <div class="w-5"></div>
+                      </div>
+                      <table class="w-full">
+                        <thead>
+                          <tr class="text-gray-500 text-xs font-normal">
+                            <th class="pb-2 font-normal w-[14.28%]">Th 2</th>
+                            <th class="pb-2 font-normal w-[14.28%]">Th 3</th>
+                            <th class="pb-2 font-normal w-[14.28%]">Th 4</th>
+                            <th class="pb-2 font-normal w-[14.28%]">Th 5</th>
+                            <th class="pb-2 font-normal w-[14.28%]">Th 6</th>
+                            <th class="pb-2 font-normal w-[14.28%]">Th 7</th>
+                            <th class="pb-2 font-normal w-[14.28%]">CN</th>
+                          </tr>
+                        </thead>
+                        <tbody id="calendarBody1"></tbody>
+                      </table>
                     </div>
-                    <table class="w-full">
-                      <thead>
-                        <tr class="text-gray-500 text-xs font-normal">
-                          <th class="pb-2 font-normal w-[14.28%]">Th 2</th>
-                          <th class="pb-2 font-normal w-[14.28%]">Th 3</th>
-                          <th class="pb-2 font-normal w-[14.28%]">Th 4</th>
-                          <th class="pb-2 font-normal w-[14.28%]">Th 5</th>
-                          <th class="pb-2 font-normal w-[14.28%]">Th 6</th>
-                          <th class="pb-2 font-normal w-[14.28%]">Th 7</th>
-                          <th class="pb-2 font-normal w-[14.28%]">CN</th>
-                        </tr>
-                      </thead>
-                      <tbody id="calendarBody2"></tbody>
-                    </table>
+                    
+                    <div class="flex-1 px-5 py-4 border-t border-neutral-200 sm:border-t-0">
+                      <div class="flex justify-between items-center mb-4">
+                        <div class="w-5"></div>
+                        <span id="monthYear2" class="font-semibold text-base text-gray-900">Tháng Mười Một 2025</span>
+                        <button onclick="nextMonth()" class="text-gray-900 hover:text-gray-600 transition-colors">
+                          <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                      </div>
+                      <table class="w-full">
+                        <thead>
+                          <tr class="text-gray-500 text-xs font-normal">
+                            <th class="pb-2 font-normal w-[14.28%]">Th 2</th>
+                            <th class="pb-2 font-normal w-[14.28%]">Th 3</th>
+                            <th class="pb-2 font-normal w-[14.28%]">Th 4</th>
+                            <th class="pb-2 font-normal w-[14.28%]">Th 5</th>
+                            <th class="pb-2 font-normal w-[14.28%]">Th 6</th>
+                            <th class="pb-2 font-normal w-[14.28%]">Th 7</th>
+                            <th class="pb-2 font-normal w-[14.28%]">CN</th>
+                          </tr>
+                        </thead>
+                        <tbody id="calendarBody2"></tbody>
+                      </table>
+                    </div>
                   </div>
-                </div>
-                
-                <div class="flex items-center justify-between border-neutral-200 px-5 py-3 bg-muted/50">
-                  <div class="flex items-center gap-2">
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" id="amLich" class="sr-only peer" onchange="toggleLunarCalendar()">
-                      <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-5 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-500"></div>
-                    </label>
-                    <span class="text-sm text-gray-900 font-medium select-none">Âm lịch</span>
-                  </div>
-                  <div class="flex gap-2">
-                    <button onclick="resetDatePicker()" class="px-5 py-2 border border-gray-300 text-sm font-normal text-gray-900 hover:bg-gray-50 transition-colors">Chọn lại</button>
-                    <button onclick="closeDatePicker()" class="px-5 py-2 bg-gray-900 text-white text-sm font-normal hover:bg-gray-800 transition-colors">Chọn</button>
+
+                  <div class="flex items-center justify-between border-neutral-200 px-5 py-3 bg-muted/50 bg-gray-50 sm:rounded-b-lg sm:shadow-b-lg ">
+                    <div class="flex items-center gap-2">
+                      <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="amLich" class="sr-only peer" onchange="toggleLunarCalendar()">
+                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-5 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-500"></div>
+                      </label>
+                      <span class="text-sm text-gray-900 font-medium select-none">Âm lịch</span>
+                    </div>
+                    <div class="flex gap-2">
+                      <button onclick="resetDatePicker()" class="px-5 py-2 border border-gray-300 text-sm font-normal text-gray-900 hover:bg-gray-50 transition-colors">Chọn lại</button>
+                      <button onclick="closeDatePicker()" class="px-5 py-2 bg-gray-900 text-white text-sm font-normal hover:bg-gray-800 transition-colors">Chọn</button>
+                    </div>
                   </div>
                 </div>
               </div>
