@@ -898,27 +898,34 @@
                 <div class="self-start">                    
                   <img src="https://booking-1f5.pages.dev/date.svg" class="w-5 h-5 cursor-pointer" onclick="showDatePicker()" />
                 </div>
-              <div id="datepicker-wrapper" class="group">
+              <div id="datepicker-wrapper" class="group min-[860px]:relative">
                 <div
                   onclick="closeDatePicker()"
-                  class="fixed inset-0 bg-black/50 z-[999998] opacity-0 pointer-events-none transition-opacity duration-300 group-[.is-open]:opacity-100 group-[.is-open]:pointer-events-auto sm:hidden"
+                  class="fixed inset-0 bg-black/50 z-[999998] opacity-0 pointer-events-none transition-opacity duration-300 group-[.is-open]:opacity-100 group-[.is-open]:pointer-events-auto min-[860px]:hidden"
                 ></div>
 
                 <div
                   id="datepicker"
                   class="fixed bottom-0 left-0 z-[999999] w-full bg-white rounded-t-xl shadow-2xl transition-all duration-300 ease-in-out transform translate-y-full group-[.is-open]:translate-y-0
-                        sm:absolute sm:left-0 sm:top-full sm:w-[750px] sm:rounded-xl sm:border sm:border-neutral-300 sm:opacity-0 sm:pointer-events-none sm:translate-y-2 sm:group-[.is-open]:opacity-100 sm:group-[.is-open]:pointer-events-auto sm:group-[.is-open]:translate-y-0"
+                        min-[860px]:absolute min-[860px]:left-1/2 min-[860px]:top-full min-[860px]:w-[750px] min-[860px]:-translate-x-1/2
+                        min-[860px]:rounded-xl min-[860px]:opacity-0 min-[860px]:pointer-events-none min-[860px]:translate-y-2
+                        min-[860px]:group-[.is-open]:opacity-100 min-[860px]:group-[.is-open]:pointer-events-auto min-[860px]:group-[.is-open]:translate-y-0"
+                  role="dialog" aria-modal="true" aria-labelledby="monthYear1"
                 >
-                  <div class="sm:hidden w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-2.5 mb-1"></div>
-                  
-                  <div class="flex flex-col sm:flex-row bg-white sm:rounded-t-lg sm:shadow-lg sm:border sm:border-neutral-300">
+                  <div class="min-[860px]:hidden w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-2.5 mb-1"></div>
+
+                  <div class="flex flex-col min-[860px]:flex-row bg-white min-[860px]:rounded-t-lg min-[860px]:shadow-lg min-[860px]:border min-[860px]:border-neutral-300
+                              max-h-[75svh] min-[860px]:max-h-none overflow-y-auto min-[860px]:overflow-visible">
                     <div class="flex-1 px-5 py-4">
                       <div class="flex justify-between items-center mb-4">
                         <button onclick="prevMonth()" class="text-gray-900 hover:text-gray-600 transition-colors">
                           <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
                         <span id="monthYear1" class="font-semibold text-base text-gray-900">Tháng Mười 2025</span>
-                        <div class="w-5"></div>
+                        <button onclick="nextMonth()" class="min-[860px]:hidden text-gray-900 hover:text-gray-600 transition-colors">
+                          <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="hidden min-[860px]:block w-5"></div>
                       </div>
                       <table class="w-full">
                         <thead>
@@ -935,12 +942,13 @@
                         <tbody id="calendarBody1"></tbody>
                       </table>
                     </div>
-                    
-                    <div class="flex-1 px-5 py-4 border-t border-neutral-200 sm:border-t-0">
+
+                    <!-- Tháng phải (ẩn dưới 860, hiện ≥860) -->
+                    <div class="hidden min-[860px]:block flex-1 px-5 py-4 border-t border-neutral-200 min-[860px]:border-t-0">
                       <div class="flex justify-between items-center mb-4">
                         <div class="w-5"></div>
                         <span id="monthYear2" class="font-semibold text-base text-gray-900">Tháng Mười Một 2025</span>
-                        <button onclick="nextMonth()" class="text-gray-900 hover:text-gray-600 transition-colors">
+                        <button onclick="nextMonth()" class="hidden min-[860px]:inline-flex text-gray-900 hover:text-gray-600 transition-colors">
                           <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
                       </div>
@@ -961,17 +969,29 @@
                     </div>
                   </div>
 
-                  <div class="flex items-center justify-between border-neutral-200 px-5 py-3 bg-muted/50 bg-gray-50 sm:rounded-b-lg sm:shadow-b-lg ">
-                    <div class="flex items-center gap-2">
-                      <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="amLich" class="sr-only peer" onchange="toggleLunarCalendar()">
-                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-5 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-500"></div>
-                      </label>
-                      <span class="text-sm text-gray-900 font-medium select-none">Âm lịch</span>
-                    </div>
-                    <div class="flex gap-2">
-                      <button onclick="resetDatePicker()" class="px-5 py-2 border border-gray-300 text-sm font-normal text-gray-900 hover:bg-gray-50 transition-colors">Chọn lại</button>
-                      <button onclick="closeDatePicker()" class="px-5 py-2 bg-gray-900 text-white text-sm font-normal hover:bg-gray-800 transition-colors">Chọn</button>
+                  <!-- Footer -->
+                  <div class="px-5 py-3 bg-gray-50 min-[860px]:rounded-b-lg">
+                    <div class="flex flex-col gap-3 min-[860px]:flex-row min-[860px]:items-center min-[860px]:justify-between">
+                      <div class="flex items-center gap-2">
+                        <label class="relative inline-flex items-center cursor-pointer">
+                          <input type="checkbox" id="amLich" class="sr-only peer" onchange="toggleLunarCalendar()">
+                          <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-5 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-500"></div>
+                        </label>
+                        <span class="text-sm text-gray-900 font-medium select-none">Âm lịch</span>
+                      </div>
+
+                      <div class="grid grid-cols-2 gap-2 min-[860px]:flex min-[860px]:gap-2">
+                        <button
+                          onclick="resetDatePicker()"
+                          class="px-5 py-2 border border-gray-300 text-sm font-normal text-gray-900 hover:bg-gray-50 transition-colors w-full min-[860px]:w-auto">
+                          Chọn lại
+                        </button>
+                        <button
+                          onclick="closeDatePicker()"
+                          class="px-5 py-2 bg-gray-900 text-white text-sm font-normal hover:bg-gray-800 transition-colors w-full min-[860px]:w-auto">
+                          Chọn
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
