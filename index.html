@@ -1008,97 +1008,109 @@
               <div class="self-start">
                 <img src="https://booking-1f5.pages.dev/Vector.png" class="w-4 h-4 cursor-pointer" onclick="togglePassengerDropdown()" />
               </div>
-              <div id="passengerDropdown" class="absolute z-20 left-0 top-full bg-white border border-neutral-300 rounded-lg shadow-lg hidden w-full sm:w-72 lg:w-[612px] min-h-[270px]">
-                <div class="flex h-full flex-col">
-                  <div class="flex-1 p-4">
-                    <div class="flex flex-col gap-4 sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 md:gap-6">
-                      <div class="flex flex-col gap-4">
-                        <div class="mb-auto hidden md:block">
-                          <div class="flex flex-col items-start gap-2 rounded-md p-3 text-sm text-gray-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden="true">
-                              <circle cx="12" cy="12" r="10"></circle>
-                              <path d="M12 16v-4"></path>
-                              <path d="M12 8h.01"></path>
-                            </svg>
-                            <span class="text-content-secondary text-xs font-medium">Passengers under 14 years old need the consent of a legal representative to book.</span>
+              <!-- WRAPPER dùng state .is-open giống datepicker -->
+              <div id="passenger-wrapper" class="group min-[860px]:relative">
+                <!-- Overlay (drawer) -->
+                <div onclick="closePassengerDropdown()"
+                    class="fixed inset-0 bg-black/50 z-[999998] opacity-0 pointer-events-none transition-opacity duration-300
+                            group-[.is-open]:opacity-100 group-[.is-open]:pointer-events-auto min-[860px]:hidden"></div>
+
+                <!-- DROPDOWN / DRAWER -->
+                <div id="passengerDropdown"
+                  role="dialog" aria-modal="true"
+                  class="fixed bottom-0 left-0 z-[999999] w-full bg-white rounded-t-xl shadow-2xl
+                          transition-all duration-300 ease-in-out transform translate-y-full group-[.is-open]:translate-y-0
+                          min-[860px]:absolute min-[860px]:top-full min-[860px]:w-[612px]
+                          min-[860px]:left-1/2 min-[860px]:-translate-x-1/2
+                          min-[860px]:rounded-t-lg min-[860px]:border min-[860px]:border-neutral-300
+                          min-[860px]:opacity-0 min-[860px]:pointer-events-none min-[860px]:translate-y-2
+                          min-[860px]:group-[.is-open]:opacity-100 min-[860px]:group-[.is-open]:pointer-events-auto min-[860px]:group-[.is-open]:translate-y-0">
+                
+                  <!-- Drag handle (drawer) -->
+                  <div class="min-[860px]:hidden w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-2.5 mb-1" aria-hidden="true"></div>
+
+                  <!-- CONTENT scrollable (drawer) -->
+                  <div class="flex h-full flex-col">
+                    <div class="flex-1 p-4 bg-white rounded-t-lg">
+                      <div class="flex flex-col gap-4 sm:grid sm:grid-cols-1 md:grid md:grid-cols-2 md:gap-6">
+                        <div class="flex flex-col gap-4">
+                          <div class="mb-auto hidden md:block">
+                            <div class="flex flex-col items-start gap-2 rounded-md p-3 text-sm text-gray-600">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                              <span class="text-content-secondary text-xs font-medium">Passengers under 14 years old need the consent of a legal representative to book.</span>
+                            </div>
                           </div>
-                        </div>
-                        <div class="mt-auto hidden md:block" id="passengerInfoCol">
-                          <div id="passengerMaxNote" class="mt-3 text-xs text-red-600 hidden" role="alert">
+                          <div class="mt-auto hidden md:block" id="passengerInfoCol">
+                            <div id="passengerMaxNote" class="mt-3 text-xs text-red-600 hidden" role="alert">
                               Xin lưu ý: Bạn có thể đặt chỗ cho tối đa chín hành khách.
-                          </div>
-                        </div>
-                      </div>
-                      <div class="flex flex-col">
-                        <div class="bg-ceramic-yellow-50 flex flex-col gap-4 py-3">
-                          <div class="flex items-center justify-between px-4">
-                            <div>
-                              <div class="font-medium text-gray-900">Người lớn</div>
-                              <div class="text-sm text-gray-500">Từ 12 tuổi trở lên</div>
-                            </div>
-                            <div class="flex items-center gap-1">
-                              <button id="adultMinus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0" onclick="updatePassengerCount('adult', -1)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus h-4 w-4" aria-hidden="true">
-                                  <path d="M5 12h14"></path>
-                                </svg>
-                              </button>
-                              <span id="adultCount" class="w-8 text-center font-medium">1</span>
-                              <button id="adultPlus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0" onclick="updatePassengerCount('adult', 1)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4" aria-hidden="true">
-                                  <path d="M5 12h14"></path>
-                                  <path d="M12 5v14"></path>
-                                </svg>
-                              </button>
-                            </div>
-                          </div>
-                          <div class="flex items-center justify-between px-4">
-                            <div>
-                              <div class="font-medium text-gray-900">Trẻ em</div>
-                              <div class="text-sm text-gray-500">Từ 2-11 tuổi</div>
-                            </div>
-                            <div class="flex items-center gap-1">
-                              <button id="childMinus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0 disabled:opacity-50" onclick="updatePassengerCount('child', -1)" disabled>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus h-4 w-4" aria-hidden="true">
-                                  <path d="M5 12h14"></path>
-                                </svg>
-                              </button>
-                              <span id="childCount" class="w-8 text-center font-medium">0</span>
-                              <button id="childPlus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0" onclick="updatePassengerCount('child', 1)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4" aria-hidden="true">
-                                  <path d="M5 12h14"></path>
-                                  <path d="M12 5v14"></path>
-                                </svg>
-                              </button>
-                            </div>
-                          </div>
-                          <div class="flex items-center justify-between px-4">
-                            <div>
-                              <div class="font-medium text-gray-900">Em bé</div>
-                              <div class="text-sm text-gray-500">Dưới 2 tuổi, ngồi lòng</div>
-                            </div>
-                            <div class="flex items-center gap-1">
-                              <button id="infantMinus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0 disabled:opacity-50" onclick="updatePassengerCount('infant', -1)" disabled>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus h-4 w-4" aria-hidden="true">
-                                  <path d="M5 12h14"></path>
-                                </svg>
-                              </button>
-                              <span id="infantCount" class="w-8 text-center font-medium">0</span>
-                              <button id="infantPlus" class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-background border gap-1.5 has-[>svg]:px-2.5 border-content-primary h-8 w-8 rounded-full p-0" onclick="updatePassengerCount('infant', 1)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4" aria-hidden="true">
-                                  <path d="M5 12h14"></path>
-                                  <path d="M12 5v14"></path>
-                                </svg>
-                              </button>
                             </div>
                           </div>
                         </div>
-                        <div class="flex flex-col gap-2 pt-2 sm:flex-row">
-                          <button class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex items-center justify-center gap-1 !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 border-input bg-background border h-9 px-4 py-2 has-[>svg]:px-3 flex-1" onclick="resetPassengers()">Reset</button>
-                          <button class="focus-visible:border-ring focus-visible:ring-ring/50 disabled:bg-primary-disabled disabled:text-content-primary-disabled aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 inline-flex items-center justify-center gap-1 !rounded-[8px] text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:cursor-pointer focus-visible:ring-[3px] disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 text-white shadow-xs h-9 px-4 py-2 has-[>svg]:px-3 flex-1 bg-gray-800 hover:bg-gray-900" onclick="closePassengerDropdown()">Done</button>
+                        <div class="flex flex-col bg-gray-50">
+                          <div class="bg-ceramic-yellow-50 flex flex-col gap-4 py-3">
+                            <!-- Adult -->
+                            <div class="flex items-center justify-between px-4">
+                              <div>
+                                <div class="font-medium text-gray-900">Người lớn</div>
+                                <div class="text-sm text-gray-500">Từ 12 tuổi trở lên</div>
+                              </div>
+                              <div class="flex items-center gap-1">
+                                <button id="adultMinus" class="inline-flex h-8 w-8 items-center justify-center rounded-full border p-0" onclick="updatePassengerCount('adult', -1)">
+                                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>
+                                </button>
+                                <span id="adultCount" class="w-8 text-center font-medium">1</span>
+                                <button id="adultPlus" class="inline-flex h-8 w-8 items-center justify-center rounded-full border p-0" onclick="updatePassengerCount('adult', 1)">
+                                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                </button>
+                              </div>
+                            </div>
+                            <!-- Child -->
+                            <div class="flex items-center justify-between px-4">
+                              <div>
+                                <div class="font-medium text-gray-900">Trẻ em</div>
+                                <div class="text-sm text-gray-500">Từ 2-11 tuổi</div>
+                              </div>
+                              <div class="flex items-center gap-1">
+                                <button id="childMinus" class="inline-flex h-8 w-8 items-center justify-center rounded-full border p-0 disabled:opacity-50" onclick="updatePassengerCount('child', -1)" disabled>
+                                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>
+                                </button>
+                                <span id="childCount" class="w-8 text-center font-medium">0</span>
+                                <button id="childPlus" class="inline-flex h-8 w-8 items-center justify-center rounded-full border p-0" onclick="updatePassengerCount('child', 1)">
+                                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                </button>
+                              </div>
+                            </div>
+                            <!-- Infant -->
+                            <div class="flex items-center justify-between px-4">
+                              <div>
+                                <div class="font-medium text-gray-900">Em bé</div>
+                                <div class="text-sm text-gray-500">Dưới 2 tuổi, ngồi lòng</div>
+                              </div>
+                              <div class="flex items-center gap-1">
+                                <button id="infantMinus" class="inline-flex h-8 w-8 items-center justify-center rounded-full border p-0 disabled:opacity-50" onclick="updatePassengerCount('infant', -1)" disabled>
+                                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/></svg>
+                                </button>
+                                <span id="infantCount" class="w-8 text-center font-medium">0</span>
+                                <button id="infantPlus" class="inline-flex h-8 w-8 items-center justify-center rounded-full border p-0" onclick="updatePassengerCount('infant', 1)">
+                                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
+                      </div> <!-- /grid -->
+                    </div> <!-- /flex-1 -->
+
+                    <!-- FOOTER (sticky ở drawer, static ở desktop) -->
+                    <div class="px-4 pt-2 pb-3 border-t bg-white sticky bottom-0 min-[860px]:static min-[860px]:border-0 rounded-b-lg">
+                      <div class="grid grid-cols-2 gap-2 min-[860px]:flex min-[860px]:justify-end min-[860px]:gap-2">
+                        <button class="px-5 py-2 border border-gray-300 text-sm font-normal text-gray-900 hover:bg-gray-50 transition-colors w-full min-[860px]:w-auto"
+                                onclick="resetPassengers()">Reset</button>
+                        <button class="px-5 py-2 bg-gray-800 hover:bg-gray-900 text-white text-sm font-normal transition-colors w-full min-[860px]:w-auto"
+                                onclick="closePassengerDropdown()">Done</button>
                       </div>
                     </div>
-                  </div>
+                  </div> <!-- /scroll container -->
                 </div>
               </div>
             </div>

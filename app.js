@@ -350,9 +350,62 @@ function toggleLunarCalendar() {
 }
 
 // ================== PASSENGERS ==================
+// ================== PASSENGERS (fixed drawer <860px; dropdown >=860px) ==================
 const MIN_ADULTS = 1;
 const MAX_TOTAL = 9;
 const MAX_PASSENGER_MSG = 'Xin lưu ý: Bạn có thể đặt chỗ cho tối đa chín hành khách.';
+
+// Nếu các biến chưa có ở global, khởi tạo mặc định (không ghi đè nếu đã có)
+if (typeof window.adultCount === 'undefined') window.adultCount = 1;
+if (typeof window.childCount === 'undefined') window.childCount = 0;
+if (typeof window.infantCount === 'undefined') window.infantCount = 0;
+
+function isDrawer() {
+  return window.innerWidth < 860; // < 860px = drawer
+}
+
+function getWrap()  { return document.getElementById('passenger-wrapper'); }
+function getPanel() { return document.getElementById('passengerDropdown'); }
+
+function openPassengerDropdown() {
+  const wrap = getWrap();
+  const panel = getPanel();
+  if (!wrap || !panel) return;
+
+  // Nếu markup còn 'hidden' ở panel thì bỏ (không bắt buộc)
+  panel.classList.remove('hidden');
+
+  // Bật trạng thái group để kích hoạt translate/opacity/pointer-events
+  wrap.classList.add('is-open');
+
+  // Khóa cuộn khi ở chế độ drawer
+  if (isDrawer()) document.body.style.overflow = 'hidden';
+
+  // Cập nhật UI khi mở
+  updatePassengerButtons();
+  setPassengerNotice(totalPassengers() >= MAX_TOTAL);
+}
+
+function closePassengerDropdown() {
+  const wrap = getWrap();
+  if (!wrap) return;
+
+  wrap.classList.remove('is-open');
+  document.body.style.overflow = ''; // mở khóa cuộn lại
+
+  // Nếu muốn ẩn panel hoàn toàn sau animation, bỏ comment dòng dưới:
+  // setTimeout(() => getPanel()?.classList.add('hidden'), 300);
+
+  updatePassengerDisplay();
+}
+
+// Toggle CHỈ dựa trên .is-open (KHÔNG toggle 'hidden' nữa)
+function togglePassengerDropdown() {
+  const wrap = getWrap();
+  if (!wrap) return;
+  if (wrap.classList.contains('is-open')) closePassengerDropdown();
+  else openPassengerDropdown();
+}
 
 function totalPassengers() {
   return adultCount + childCount + infantCount;
@@ -362,8 +415,7 @@ function totalPassengers() {
 function ensurePassengerNoteEl() {
   let el = document.getElementById('passengerMaxNote');
   if (!el) {
-    const host = document.getElementById('passengerInfoCol') 
-              || document.getElementById('passengerDropdown'); 
+    const host = document.getElementById('passengerInfoCol') || getPanel();
     if (!host) return null;
     el = document.createElement('div');
     el.id = 'passengerMaxNote';
@@ -376,37 +428,16 @@ function ensurePassengerNoteEl() {
 function setPassengerNotice(visible) {
   const el = ensurePassengerNoteEl();
   if (!el) return;
-
-  el.textContent = `${MAX_PASSENGER_MSG}`;
-
+  el.textContent = MAX_PASSENGER_MSG;
   if (visible) {
-    // Hiển thị: bỏ class hidden và đảm bảo display block
     el.classList.remove('hidden');
     el.style.display = 'block';
     el.removeAttribute('aria-hidden');
   } else {
-    // Ẩn: thêm class hidden
     el.classList.add('hidden');
     el.style.display = '';
     el.setAttribute('aria-hidden', 'true');
   }
-}
-
-function togglePassengerDropdown() {
-  const dropdown = document.getElementById('passengerDropdown');
-  if (!dropdown) return;
-  dropdown.classList.toggle('hidden');
-  if (!dropdown.classList.contains('hidden')) {
-    updatePassengerButtons();
-    // Hiện/ẩn thông báo theo trạng thái khi mở dropdown
-    setPassengerNotice(totalPassengers() >= MAX_TOTAL);
-  }
-}
-
-function closePassengerDropdown() {
-  const dropdown = document.getElementById('passengerDropdown');
-  if (dropdown) dropdown.classList.add('hidden');
-  updatePassengerDisplay();
 }
 
 function resetPassengers() {
@@ -427,37 +458,30 @@ function updatePassengerCount(type, delta) {
   let nextChild = childCount;
   let nextInfant = infantCount;
 
-  if (type === 'adult') {
-    nextAdult = Math.max(MIN_ADULTS, adultCount + delta);
-  } else if (type === 'child') {
-    nextChild = Math.max(0, childCount + delta);
-  } else if (type === 'infant') {
-    nextInfant = Math.max(0, infantCount + delta);
-  }
+  if (type === 'adult')      nextAdult  = Math.max(MIN_ADULTS, adultCount + delta);
+  else if (type === 'child') nextChild  = Math.max(0,          childCount + delta);
+  else if (type === 'infant')nextInfant = Math.max(0,          infantCount + delta);
 
-  // Chặn tăng làm vượt tổng
+  // Chặn vượt tổng
   const projectedTotal = nextAdult + nextChild + nextInfant;
   if (delta > 0 && projectedTotal > MAX_TOTAL) {
-    // Hiện log khi chạm trần
     setPassengerNotice(true);
     updatePassengerButtons();
     return;
   }
 
   // Áp dụng
-  adultCount = nextAdult;
-  childCount = nextChild;
+  adultCount  = nextAdult;
+  childCount  = nextChild;
   infantCount = nextInfant;
 
   // Em bé ≤ người lớn
-  if (infantCount > adultCount) {
-    infantCount = adultCount;
-  }
+  if (infantCount > adultCount) infantCount = adultCount;
 
-  // Bảo toàn tổng ≤ 9 (phòng trường hợp spam nút)
+  // Bảo toàn tổng ≤ 9 (chống spam)
   while (totalPassengers() > MAX_TOTAL) {
-    if (infantCount > 0) infantCount--;
-    else if (childCount > 0) childCount--;
+    if (infantCount > 0)      infantCount--;
+    else if (childCount > 0)  childCount--;
     else if (adultCount > MIN_ADULTS) adultCount--;
     else break;
   }
@@ -465,35 +489,33 @@ function updatePassengerCount(type, delta) {
   updatePassengerCounts();
   updatePassengerButtons();
   updatePassengerDisplay();
-
-  // Cập nhật thông báo theo trạng thái mới
   setPassengerNotice(totalPassengers() >= MAX_TOTAL);
 }
 
 function updatePassengerCounts() {
-  const adultEl = document.getElementById('adultCount');
-  const childEl = document.getElementById('childCount');
+  const adultEl  = document.getElementById('adultCount');
+  const childEl  = document.getElementById('childCount');
   const infantEl = document.getElementById('infantCount');
-  if (adultEl) adultEl.textContent = adultCount;
-  if (childEl) childEl.textContent = childCount;
+  if (adultEl)  adultEl.textContent  = adultCount;
+  if (childEl)  childEl.textContent  = childCount;
   if (infantEl) infantEl.textContent = infantCount;
 }
 
 function updatePassengerButtons() {
   const total = totalPassengers();
 
-  const adultMinus = document.getElementById('adultMinus');
-  const adultPlus  = document.getElementById('adultPlus');
-  const childMinus = document.getElementById('childMinus');
-  const childPlus  = document.getElementById('childPlus');
+  const adultMinus  = document.getElementById('adultMinus');
+  const adultPlus   = document.getElementById('adultPlus');
+  const childMinus  = document.getElementById('childMinus');
+  const childPlus   = document.getElementById('childPlus');
   const infantMinus = document.getElementById('infantMinus');
   const infantPlus  = document.getElementById('infantPlus');
 
-  if (adultMinus) adultMinus.disabled = adultCount <= MIN_ADULTS;
-  if (adultPlus)  adultPlus.disabled  = total >= MAX_TOTAL;
+  if (adultMinus)  adultMinus.disabled  = adultCount <= MIN_ADULTS;
+  if (adultPlus)   adultPlus.disabled   = total >= MAX_TOTAL;
 
-  if (childMinus) childMinus.disabled = childCount <= 0;
-  if (childPlus)  childPlus.disabled  = total >= MAX_TOTAL;
+  if (childMinus)  childMinus.disabled  = childCount <= 0;
+  if (childPlus)   childPlus.disabled   = total >= MAX_TOTAL;
 
   if (infantMinus) infantMinus.disabled = infantCount <= 0;
   if (infantPlus)  infantPlus.disabled  = (infantCount >= adultCount) || (total >= MAX_TOTAL);
@@ -505,21 +527,37 @@ function updatePassengerDisplay() {
   if (!display) return;
 
   const parts = [];
-  if (adultCount) parts.push(`${adultCount} NL`);
-  if (childCount) parts.push(`${childCount} TE`);
+  if (adultCount)  parts.push(`${adultCount} NL`);
+  if (childCount)  parts.push(`${childCount} TE`);
   if (infantCount) parts.push(`${infantCount} EB`);
 
   const label = total === 1 ? '1 Hành khách' : `${total} Hành khách`;
   display.textContent = parts.length ? `${label} (${parts.join(', ')})` : label;
 }
 
-// Nếu bạn có nút +/– gọi trực tiếp, có thể chặn tăng khi vượt giới hạn:
-window.incAdult = () => updatePassengerCount('adult', +1);
-window.decAdult = () => updatePassengerCount('adult', -1);
-window.incChild = () => updatePassengerCount('child', +1);
-window.decChild = () => updatePassengerCount('child', -1);
+// Gán helper (nếu bạn gọi qua window.* ở nơi khác)
+window.incAdult  = () => updatePassengerCount('adult', +1);
+window.decAdult  = () => updatePassengerCount('adult', -1);
+window.incChild  = () => updatePassengerCount('child', +1);
+window.decChild  = () => updatePassengerCount('child', -1);
 window.incInfant = () => updatePassengerCount('infant', +1);
 window.decInfant = () => updatePassengerCount('infant', -1);
+
+// Đóng bằng phím Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closePassengerDropdown();
+});
+
+// Cập nhật khoá cuộn khi resize qua ngưỡng 860
+window.addEventListener('resize', () => {
+  const wrap = getWrap();
+  if (!wrap) return;
+  if (wrap.classList.contains('is-open')) {
+    // nếu đang mở và chuyển sang drawer => khóa cuộn; ngược lại mở khóa
+    if (isDrawer()) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+  }
+});
 
 // ================== SWAP AIRPORTS (MODAL) ==================
 function swapAirports() {
